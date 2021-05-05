@@ -27,8 +27,8 @@ if (cfg.ENVIRONMENT == 'development') {
 //     mongoDBUrl = "mongodb://" + cfg.MONGO_HOST + ":" + cfg.MONGO_PORT + "/" + cfg.MONGO_DATABASE;
 // }
 
-logger.info('testing2')
 logger.info("MongoDb url: " + mongoDBUrl);
+console.log("MongoDb url: " + mongoDBUrl)
     
 mongoose.connect(
     mongoDBUrl,
@@ -39,6 +39,8 @@ mongoose.connect(
     },
     (err) => {
         if (err) {
+            console.log("Error while connecting to database (" +
+                mongoDBUrl + ") "+ err.message)
             logger.error("Error while connecting to database (" + 
             mongoDBUrl + ") "+ err.message);
         }
@@ -46,13 +48,15 @@ mongoose.connect(
 );
 
 mongoose.connection.once("open", function () {
-    logger.info("Connected to the databasee");
+    logger.info("Connected to the database");
+    console.log("Connected to the database");
 });
   
 const bot = new Telegraf(cfg.BOT_TOKEN)
 
 bot.launch()
 logger.info("Bot started ...");
+console.log("Bot started ...")
 
 bot.start(botHandlers.handleStartCommand)
 bot.on('text', botHandlers.handleTextMessage)

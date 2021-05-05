@@ -8447,3 +8447,66 @@
   label: 'iman-client-bot',
   metadata: {}
 }
+{
+  message: 'testing1',
+  level: 'info',
+  timestamp: '2021-05-05T11:11:02.442Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'testing2',
+  level: 'info',
+  timestamp: '2021-05-05T11:11:02.446Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'MongoDb url: mongod+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority',
+  level: 'info',
+  timestamp: '2021-05-05T11:11:02.446Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Bot started ...',
+  level: 'info',
+  timestamp: '2021-05-05T11:11:02.450Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Error while connecting to database (mongod+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority) Invalid connection string',
+  level: 'error',
+  timestamp: '2021-05-05T11:11:02.467Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'testing1',
+  level: 'info',
+  timestamp: '2021-05-05T11:13:58.437Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'MongoDb url: mongodb+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority',
+  level: 'info',
+  timestamp: '2021-05-05T11:13:58.440Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Bot started ...',
+  level: 'info',
+  timestamp: '2021-05-05T11:13:58.445Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Connected to the database',
+  level: 'info',
+  timestamp: '2021-05-05T11:14:00.757Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
