@@ -177,7 +177,7 @@ class Bot {
         await userStorage.changeStep(this.tg_user_id, steps.MAIN)
 
         this.ctx.reply(i18n("Main menu"), 
-            await keyboards.selectMainMenuKeyboard(i18n))
+            await keyboards.mainMenuKeyboard(i18n))
     }
     async handlePaymentMenu(text) {
         switch (text) {
