@@ -19,6 +19,9 @@ logger.info('testing1')
 //     "/" +
 //     cfg.MONGO_DATABASE;
 
+const PORT = process.env.PORT || 3000;
+
+
 if (cfg.ENVIRONMENT == 'development') {
     mongoDBUrl = "mongodb+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority";
 }
