@@ -1,6 +1,6 @@
 const config = {
   ENVIRONMENT: getConf("NODE_ENV", "development"),
-  MONGO_HOST: getConf("MONGO_HOST", "localhost"),
+  MONGO_HOST: getConf("MONGO_HOST", "cluster0.3yg4b.mongodb.net"),
   MONGO_PORT: getConf("MONGO_PORT", "27017"),
   MONGO_USER: getConf("MONGO_USER", "iman"),
   MONGO_PASSWORD: getConf("MONGO_PASSWORD", "iman"),

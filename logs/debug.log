@@ -7978,3 +7978,24 @@
   label: 'iman-client-bot',
   metadata: {}
 }
+{
+  message: 'MongoDb url: mongodb+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority',
+  level: 'info',
+  timestamp: '2021-05-05T06:42:38.874Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Bot started ...',
+  level: 'info',
+  timestamp: '2021-05-05T06:42:38.882Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Connected to the databasee',
+  level: 'info',
+  timestamp: '2021-05-05T06:42:41.489Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
