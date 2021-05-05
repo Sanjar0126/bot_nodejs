@@ -7999,3 +7999,31 @@
   label: 'iman-client-bot',
   metadata: {}
 }
+{
+  message: 'testing',
+  level: 'info',
+  timestamp: '2021-05-05T06:51:57.458Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'MongoDb url: mongodb+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority',
+  level: 'info',
+  timestamp: '2021-05-05T06:51:57.462Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Bot started ...',
+  level: 'info',
+  timestamp: '2021-05-05T06:51:57.467Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Connected to the databasee',
+  level: 'info',
+  timestamp: '2021-05-05T06:51:59.672Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
