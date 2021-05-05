@@ -1,0 +1,4 @@
+node_modules/
+logs/debug.logs
+logs/error.log
+.idea
