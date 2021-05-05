@@ -22,6 +22,11 @@ let mongoDBUrl =
 if (cfg.ENVIRONMENT == 'development') {
     mongoDBUrl = "mongodb+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority";
 }
+
+// if (cfg.ENVIRONMENT == 'development') {
+//     mongoDBUrl = "mongodb://" + cfg.MONGO_HOST + ":" + cfg.MONGO_PORT + "/" + cfg.MONGO_DATABASE;
+// }
+
 logger.info('testing2')
 logger.info("MongoDb url: " + mongoDBUrl);
     
