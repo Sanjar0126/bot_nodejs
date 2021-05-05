@@ -1,5 +1,6 @@
-const request = require('request');
 const logger = require("../config/logger.js");
+const config = require("../config/index.js")
+const axios = require("axios");
 
 const utils = {
     validatePhoneNumber(phone_number) {
@@ -17,7 +18,6 @@ const utils = {
             '<b>' + i18n('Payment status') + ':</b> ' + i18n(credit['payment_status']) + '\n' +
             '<b>' + i18n('Credit amount left') + ':</b> ' + credit['left'] + ' ' + i18n('sum') + '\n'
             '<b>' + i18n('Current month amount') + ':</b> ' + credit['current_month_amount'] + ' ' + i18n('sum') + '\n'
-    
             return text
     },
     getCreditPaymentScheduleText(i18n, creditPaymentSchedule) {

@@ -20,7 +20,7 @@ class Bot {
         await userStorage.changeStep(this.tg_user_id, steps.SELECT_LANGUAGE)
         let text = "O'zingizga qulay tilni tanlang!\n"
             + "-----\n" 
-            + "Выберите удобный Вам язык!.\n"
+            + "Выберите удобный Bам язык!.\n"
 
         this.ctx.reply(text, keyboards.selectLanguageMenuKeyboard)
     } 
@@ -28,7 +28,6 @@ class Bot {
     async handleSelectLanguageMenu(text) {
         await this.ctx.deleteMessage()
         await userStorage.update(this.tg_user_id, {'language': text})
-        
         this.user.language = text
         activateLanguage(text)
         
@@ -41,7 +40,6 @@ class Bot {
 
     async displayLoginMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.LOGIN)
-
         this.ctx.replyWithHTML(i18n('Enter phone number'), await keyboards.loginMenuKeyboard(i18n))
     }
     
@@ -58,7 +56,6 @@ class Bot {
                 
                 if (utils.validatePhoneNumber(text)) {
                     await userStorage.update(this.tg_user_id, {'phone_number': text})
-                    
                     this.user.phone_number = text
                     this.displayConfirmLoginMenu()
                 } else {
@@ -75,6 +72,7 @@ class Bot {
             await keyboards.backKeyboard(i18n))
     }
     async handleConfirmLoginMenu(text) {
+
         switch (text) {
             case 'back':
                 await this.ctx.deleteMessage()

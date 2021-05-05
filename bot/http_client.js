@@ -24,7 +24,7 @@ const httpClient = {
         //     });
         // }) 
     },
-    confirmLogin(data){
+    confirmLogin(phone, code){
         res = {
             'status': 200
         }
