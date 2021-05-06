@@ -3,44 +3,38 @@ const logger = require("../config/logger.js");
 
 const httpClient = {
 
-    check_phone(text){
+    async check_phone(text){
         let phone = text.replace('+', '')
-        let verify_code
         let status
-        axios.post('https://customer-user.api.iman.uz/v1/sms-code', {
-            phone_number: phone
-        }).then(function (response) {
-            console.log(response);
-            verify_code = response.data.code
-            status = response.status
-        }).catch(function (error) {
-            console.log(error);
-        });
-        res = {
-            'status': status,
-            'code': verify_code
+        try {
+            let res = await axios.post('https://customer-user.api.iman.uz/v1/sms-code', {
+                phone_number: phone
+            })
+            console.log(res.status);
+            status = res.status
+            return {
+                status_code: status,
+            }
+        }catch (e) {
+            throw e
         }
-        return res
-
     },
 
-    confirmLogin(text, code){
+    async confirmLogin(text, code){
         let phone = text.replace('+', '')
-        let status
         let body = {
             "code": code,
             "phone_number": phone
         }
-        axios.post('https://customer-user.api.iman.uz/v1/login', {
-            body
-        }).then(function (response) {
-            console.log(response);
-            status = response.status
-        }).catch(function (error) {
-            console.log(error);
-        });
-        return {
-            'status': status
+        try {
+            let res = await axios.post('https://customer-user.api.iman.uz/v1/login', {
+                body
+            })
+            return {
+                status: res
+            }
+        }catch (e) {
+            throw e
         }
 
     },

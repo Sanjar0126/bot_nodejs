@@ -53,8 +53,9 @@ class Bot {
                 if (!text.startsWith("+", 0)) {
                     text = '+' + text
                 }
-                res = httpClient.check_phone(text)
-                if (utils.validatePhoneNumber(text) && res.status==200) {
+                let res
+                res = await httpClient.check_phone(text)
+                if (utils.validatePhoneNumber(text) && res.status_code==200) {
                     await userStorage.update(this.tg_user_id, {'phone_number': text})
                     this.user.phone_number = text
                     this.displayConfirmLoginMenu()
@@ -79,7 +80,7 @@ class Bot {
                 this.displayLoginMenu()
                 break
             default:
-                res = httpClient.confirmLogin(this.user.phone_number, text)
+                let res = await httpClient.confirmLogin(this.user.phone_number, text)
                 if (res.status == 200) {
                     await userStorage.update(this.tg_user_id, {is_active: true})
                     this.displayMainMenu()
