@@ -22,13 +22,10 @@ const httpClient = {
 
     async confirmLogin(text, code){
         let phone = text.replace('+', '')
-        let body = {
-            "code": code,
-            "phone_number": phone
-        }
+
         try {
             let res = await axios.post('https://customer-user.api.iman.uz/v1/login', {
-                body
+                "code": code, "phone_number": phone.toString()
             })
             return {
                 status: res
