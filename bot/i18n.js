@@ -24,8 +24,8 @@ let languages = {
         'ru': "График погашения",
     },
     'Payment': {
-        'uz': "💰 To'lov",
-        'ru': "💰 Оплата",
+        'uz': "💰 Iman haqida",
+        'ru': "💰 O Iman",
     },
     'Transactions': {
         'uz': "🔁 Transaksiyalar",
@@ -108,6 +108,26 @@ let languages = {
     'btn_credit_payment_schedule': {
         'uz': '🗓 To\'lov jadvali',
         'ru': '🗓 График погашения',
+    },
+    'Mission': {
+        'uz': 'Maqsad',
+        'ru': 'Миссия'
+    },
+    'About Islam': {
+        'uz': 'Islom finansi haqida',
+        'ru': 'Oб Исламских финансах'
+    },
+    'Musavama': {
+        'uz': 'Musavama',
+        'ru': 'Мусавама'
+    },
+    'Mudaraba': {
+        'uz': 'Mudaraba',
+        'ru': 'Мудараба'
+    },
+    'About Iman': {
+        'uz': '💬 Iman haqida',
+        'ru': '💬 O Iman'
     }
 }
 

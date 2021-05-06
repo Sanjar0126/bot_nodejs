@@ -41,7 +41,7 @@ const keyboards = {
             let keyboard = Markup.inlineKeyboard([
                 [
                     Markup.button.callback(i18n('Credits'), 'credits'),
-                    Markup.button.callback(i18n('Payment'), 'payment'),
+                    Markup.button.callback(i18n('About Iman'), 'about'),
                 ],
                 [
                     Markup.button.callback(i18n('Transactions'), 'transactions'),
@@ -101,6 +101,26 @@ const keyboards = {
             resolve(keyboard)
         })
     },
+
+    aboutMenuKeyboard: (i18n) => {
+        return new Promise((resolve, reject) => {
+            let keyboard = Markup.inlineKeyboard([
+                [
+                    Markup.button.callback(i18n('Mission'), 'mission'),
+                    Markup.button.callback(i18n('About Islam'), 'about_islam'),
+                ],
+                [
+                    Markup.button.callback(i18n('Musavama'), 'musavama'),
+                    Markup.button.callback(i18n('Mudaraba'), 'mudaraba'),
+                ],
+                [
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ]
+            ])
+            resolve(keyboard)
+        })
+    },
 }
+
 
 module.exports = keyboards;

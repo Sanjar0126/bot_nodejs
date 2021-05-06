@@ -102,9 +102,9 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayCreditsMenu()
                 break
-            case 'payment':
+            case 'about':
                 await this.ctx.deleteMessage()
-                this.displayPaymentMenu()
+                this.displayAboutMenu()
                 break
             case 'transactions':
                 await this.ctx.deleteMessage()
@@ -173,17 +173,33 @@ class Bot {
         }
     }
 
-    async displayPaymentMenu() {
-        await userStorage.changeStep(this.tg_user_id, steps.MAIN)
+    async displayAboutMenu() {
+        await userStorage.changeStep(this.tg_user_id, steps.ABOUT)
 
-        this.ctx.reply(i18n("Main menu"), 
-            await keyboards.mainMenuKeyboard(i18n))
+        this.ctx.reply(i18n("About Iman"),
+            await keyboards.aboutMenuKeyboard(i18n))
     }
-    async handlePaymentMenu(text) {
+    async handleAboutMenu(text) {
         switch (text) {
-            case 'Мои рассрочки':
-            case 'Mening rasrochkalarim':
-                this.displayCreditsMenu()
+            case 'mission':
+                await this.ctx.deleteMessage()
+                this.displayMissionMenu()
+                break
+            case 'about_islam':
+                await this.ctx.deleteMessage()
+                this.displayIslamMenu()
+                break
+            case 'musavama':
+                await this.ctx.deleteMessage()
+                this.displayMusavamaMenu()
+                break
+            case 'mudaraba':
+                await this.ctx.deleteMessage()
+                this.displayMudarabaMenu()
+                break
+            case 'back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
                 break
         }
     }
@@ -200,12 +216,13 @@ class Bot {
                 this.displayMainMenu()
                 break
             default:
-                this.displa()
+                this.displayTransactionDetailMenu()
+                break
         }
     }
 
     async displayTransactionDetailMenu() {
-        await userStorage.changeStep(this.tg_user_id, steps.TRANSACTIONS)
+        await userStorage.changeStep(this.tg_user_id, steps.TRANSACTION_DETAIL)
         let transaction = httpClient.getTransactionDetail()
         let text = utils.getTransactionDetail(i18n, transaction)
         this.ctx.reply(text, 

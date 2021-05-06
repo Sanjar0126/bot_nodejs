@@ -30,6 +30,7 @@ const UserSchema = new mongoose.Schema({
             steps.CONFIRM_LOGIN,
 
             steps.MAIN,
+            steps.ABOUT,
 
             steps.CREDITS,
             steps.CREDIT_DETAIL,

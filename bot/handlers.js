@@ -85,6 +85,15 @@ const handlers = {
                 case steps.CREDIT_PAYMENT_SCHEDULE:
                     bot.handleCreditPaymentScheduleMenu(text)
                     break;
+                case steps.ABOUT:
+                    bot.handleAboutMenu(text)
+                    break;
+                case steps.TRANSACTIONS:
+                    bot.handleTransactionsMenu(text)
+                    break;
+                case steps.TRANSACTION_DETAIL:
+                    bot.handleTransactionDetailMenu(text)
+                    break;
             }
         } catch(e) {
             logger.error("Error while handling inline message: " + e)

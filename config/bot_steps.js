@@ -4,6 +4,7 @@ const botSteps = {
     CONFIRM_LOGIN: "confirm_login",
 
     MAIN: "main",
+    ABOUT: "about",
 
     CREDITS: "credits",
     CREDIT_DETAIL: "credit_detail",
