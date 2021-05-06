@@ -19,7 +19,7 @@ logger.info('testing1')
 //     "/" +
 //     cfg.MONGO_DATABASE;
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
 
 if (cfg.ENVIRONMENT == 'development') {

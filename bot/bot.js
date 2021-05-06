@@ -53,8 +53,8 @@ class Bot {
                 if (!text.startsWith("+", 0)) {
                     text = '+' + text
                 }
-                
-                if (utils.validatePhoneNumber(text)) {
+                res = httpClient.check_phone(text)
+                if (utils.validatePhoneNumber(text) && res.status==200) {
                     await userStorage.update(this.tg_user_id, {'phone_number': text})
                     this.user.phone_number = text
                     this.displayConfirmLoginMenu()

@@ -1,50 +1,48 @@
-const request = require('request');
+const axios = require('axios');
 const logger = require("../config/logger.js");
 
 const httpClient = {
-    login(data){
+
+    check_phone(text){
+        let phone = text.replace('+', '')
+        let verify_code
+        let status
+        axios.post('https://customer-user.api.iman.uz/v1/sms-code', {
+            phone_number: phone
+        }).then(function (response) {
+            console.log(response);
+            verify_code = response.data.code
+            status = response.status
+        }).catch(function (error) {
+            console.log(error);
+        });
         res = {
-            'status': 200
+            'status': status,
+            'code': verify_code
         }
         return res
-        // return new Promise((resolve, reject) => {
-        //     request({
-        //         url: "",
-        //         method: "POST",
-        //         headers : {
-        //             "Authorization" : "",
-        //         },
-        //         body: data,
-        //         json: true,
-        //     }, function (error, response, body) {
-        //         if (error) {
-        //             reject(error)
-        //         }
-        //         resolve(body);
-        //     });
-        // }) 
+
     },
-    confirmLogin(phone, code){
-        res = {
-            'status': 200
+
+    confirmLogin(text, code){
+        let phone = text.replace('+', '')
+        let status
+        let body = {
+            "code": code,
+            "phone_number": phone
         }
-        return res
-        // return new Promise((resolve, reject) => {
-        //     request({
-        //         url: "",
-        //         method: "POST",
-        //         headers : {
-        //             "Authorization" : "",
-        //         },
-        //         body: data,
-        //         json: true,
-        //     }, function (error, response, body) {
-        //         if (error) {
-        //             reject(error)
-        //         }
-        //         resolve(body);
-        //     });
-        // }) 
+        axios.post('https://customer-user.api.iman.uz/v1/login', {
+            body
+        }).then(function (response) {
+            console.log(response);
+            status = response.status
+        }).catch(function (error) {
+            console.log(error);
+        });
+        return {
+            'status': status
+        }
+
     },
     getCredits() {
         let credits = [
