@@ -5,6 +5,7 @@ const botSteps = {
 
     MAIN: "main",
     ABOUT: "about",
+    ABOUT_MISSION: 'mission',
 
     CREDITS: "credits",
     CREDIT_DETAIL: "credit_detail",

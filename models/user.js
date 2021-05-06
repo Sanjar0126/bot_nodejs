@@ -31,6 +31,7 @@ const UserSchema = new mongoose.Schema({
 
             steps.MAIN,
             steps.ABOUT,
+            steps.ABOUT_MISSION,
 
             steps.CREDITS,
             steps.CREDIT_DETAIL,

@@ -85,7 +85,7 @@ class Bot {
                     this.displayMainMenu()
                 } else {
                     await this.ctx.reply(i18n("Incorrect code"))
-                    this.displayConfirmMenu()
+                    this.displayConfirmLoginMenu()
                 }     
         }
     }
@@ -203,6 +203,19 @@ class Bot {
                 break
         }
     }
+    async displayMissionMenu() {
+        await userStorage.changeStep(this.tg_user_id, steps.ABOUT_MISSION)
+        this.ctx.reply(i18n('Mission content'),
+            await keyboards.backKeyboard(i18n))
+    }
+    async handleMissionMenu(text){
+        switch (text) {
+            case 'back':
+                await this.ctx.deleteMessage()
+                this.displayAboutMenu()
+                break;
+        }
+    }
 
     async displayTransactionsMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.TRANSACTIONS)
@@ -213,9 +226,11 @@ class Bot {
     async handleTransactionsMenu(text) {
         switch (text) {
             case 'back':
+                await this.ctx.deleteMessage()
                 this.displayMainMenu()
                 break
             default:
+                await this.ctx.deleteMessage()
                 this.displayTransactionDetailMenu()
                 break
         }
@@ -231,6 +246,7 @@ class Bot {
     async handleTransactionDetailMenu(text) {
         switch (text) {
             case 'back':
+                await this.ctx.deleteMessage()
                 this.displayTransactionsMenu()
                 break
         }

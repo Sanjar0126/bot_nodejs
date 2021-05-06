@@ -94,6 +94,9 @@ const handlers = {
                 case steps.TRANSACTION_DETAIL:
                     bot.handleTransactionDetailMenu(text)
                     break;
+                case steps.ABOUT_MISSION:
+                    bot.handleMissionMenu(text)
+                    break;
             }
         } catch(e) {
             logger.error("Error while handling inline message: " + e)
