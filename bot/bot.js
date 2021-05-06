@@ -81,7 +81,7 @@ class Bot {
                 break
             default:
                 let res = await httpClient.confirmLogin(this.user.phone_number, text)
-                if (res.status == 200) {
+                if (res.status.status == 200) {
                     await userStorage.update(this.tg_user_id, {is_active: true})
                     this.displayMainMenu()
                 } else {
