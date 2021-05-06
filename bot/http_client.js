@@ -16,7 +16,9 @@ const httpClient = {
                 status_code: status,
             }
         }catch (e) {
-            throw e
+            return{
+                status: 500
+            }
         }
     },
 
@@ -31,7 +33,9 @@ const httpClient = {
                 status: res
             }
         }catch (e) {
-            throw e
+            return{
+                status: 500
+            }
         }
 
     },
