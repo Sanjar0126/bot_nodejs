@@ -96,7 +96,16 @@ const handlers = {
                     break;
                 case steps.ABOUT_MISSION:
                     bot.handleMissionMenu(text)
+                    break
+                case steps.ISLAM_FINANCE:
+                    bot.handleIslamMenu(text)
+                    break
+                case steps.ABOUT_MUSAVAMA:
+                    bot.handleMusavamaMenu(text)
                     break;
+                case steps.ABOUT_MUDARABA:
+                    bot.handleMudarabaMenu(text)
+                    break
             }
         } catch(e) {
             logger.error("Error while handling inline message: " + e)

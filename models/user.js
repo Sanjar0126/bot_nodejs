@@ -32,6 +32,9 @@ const UserSchema = new mongoose.Schema({
             steps.MAIN,
             steps.ABOUT,
             steps.ABOUT_MISSION,
+            steps.ISLAM_FINANCE,
+            steps.ABOUT_MUSAVAMA,
+            steps.ABOUT_MUDARABA,
 
             steps.CREDITS,
             steps.CREDIT_DETAIL,

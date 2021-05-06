@@ -217,6 +217,48 @@ class Bot {
         }
     }
 
+    async displayIslamMenu() {
+        await userStorage.changeStep(this.tg_user_id, steps.ISLAM_FINANCE)
+        this.ctx.reply(i18n('Islam content'),
+            await keyboards.backKeyboard(i18n))
+    }
+    async handleIslamMenu(text){
+        switch (text) {
+            case 'back':
+                await this.ctx.deleteMessage()
+                this.displayAboutMenu()
+                break;
+        }
+    }
+
+    async displayMusavamaMenu() {
+        await userStorage.changeStep(this.tg_user_id, steps.ABOUT_MUSAVAMA)
+        this.ctx.reply(i18n('Musavama content'),
+            await keyboards.backKeyboard(i18n))
+    }
+    async handleMusavamaMenu(text){
+        switch (text) {
+            case 'back':
+                await this.ctx.deleteMessage()
+                this.displayAboutMenu()
+                break;
+        }
+    }
+
+    async displayMudarabaMenu() {
+        await userStorage.changeStep(this.tg_user_id, steps.ABOUT_MUDARABA)
+        this.ctx.reply(i18n('Mudaraba content'),
+            await keyboards.backKeyboard(i18n))
+    }
+    async handleMudarabaMenu(text){
+        switch (text) {
+            case 'back':
+                await this.ctx.deleteMessage()
+                this.displayAboutMenu()
+                break;
+        }
+    }
+
     async displayTransactionsMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.TRANSACTIONS)
         let transactions = httpClient.getTransactions()

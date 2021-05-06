@@ -6,6 +6,9 @@ const botSteps = {
     MAIN: "main",
     ABOUT: "about",
     ABOUT_MISSION: 'mission',
+    ISLAM_FINANCE: 'islam_finance',
+    ABOUT_MUSAVAMA: 'musavama',
+    ABOUT_MUDARABA: 'mudaraba',
 
     CREDITS: "credits",
     CREDIT_DETAIL: "credit_detail",
