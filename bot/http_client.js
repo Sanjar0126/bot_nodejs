@@ -25,7 +25,7 @@ const httpClient = {
 
         try {
             let res = await axios.post('https://customer-user.api.iman.uz/v1/login', {
-                "code": code, "phone_number": phone.toString()
+                "code": parseInt(code, 10), "phone_number": phone.toString()
             })
             return {
                 status: res
