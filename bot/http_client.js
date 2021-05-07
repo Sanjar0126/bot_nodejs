@@ -17,7 +17,7 @@ const httpClient = {
             }
         }catch (e) {
             return{
-                status: 500
+                status: 404
             }
         }
     },
@@ -77,6 +77,11 @@ const httpClient = {
         
         return credit
     },
+    getGraph(){
+        return{
+            excel: "https://docs.google.com/spreadsheets/d/1PlLbVLHcZO1hTHD_l8wu1WcW5E3SnKlG6vBaJvRsWoc/edit#gid=0"
+        }
+    },
     getCreditPaymentSchedule() {
         let credit = [
             {
@@ -103,19 +108,22 @@ const httpClient = {
             {
                 'contract_number': '12432423',
                 'amount': 100000,
+                'month': 3,
                 'date': '2021-03-01',
                 'payment_type': 'payme',
             },
             {
                 'contract_number': '12432423',
                 'amount': 100000,
+                'month': 2,
                 'date': '2021-02-01',
                 'payment_type': 'payme',
             },
             {
                 'contract_number': '12432423',
-                'date': 100000,
-                'month': '2021-01-01',
+                'amount': 100000,
+                'month': 1,
+                'date': '2021-01-01',
                 'payment_type': 'payme',
             }
         ]
@@ -123,14 +131,13 @@ const httpClient = {
         return transactions
     },
     getTransactionDetail() {
-        let transaction = {
+        return {
             'contract_number': '12432423',
             'amount': 100000,
+            'month': 1,
             'date': '2021-03-01',
             'payment_type': 'payme',
         }
-
-        return transaction
     },
 }
 

@@ -75,21 +75,24 @@ const keyboards = {
         return new Promise((resolve, reject) => {
             let keyboard = Markup.inlineKeyboard([
                 [
-                    Markup.button.callback(i18n('btn_back'), 'back'),
+                    Markup.button.callback(i18n('pay'), 'pay'),
                     Markup.button.callback(i18n('btn_credit_payment_schedule'), 'credit_payment_schedule'),
                 ],
+                [
+                    Markup.button.callback(i18n('btn_back'), 'back'),
+                ]
             ])
             resolve(keyboard)
         })
     },
 
-    transactionsMenuKeyboard: (i18n, transactions) => {
+        transactionsMenuKeyboard: (i18n, transactions) => {
         return new Promise((resolve, reject) => {
             let arr = [];
             transactions.forEach(transaction => {
-                let text = i18n('Contract number') + ' - ' + transaction['credit_number']
+                let text = i18n('Contract number') + ' - ' + transaction['contract_number']
                 arr.push([
-                    Markup.button.callback(text, 'credit_id' + transaction['credit_number'])
+                    Markup.button.callback(text, 'credit_id' + transaction['contract_number'])
                 ])
             })
 
@@ -120,6 +123,21 @@ const keyboards = {
             resolve(keyboard)
         })
     },
+
+    payMenuKeyboard: (i18n) =>{
+        return new Promise((resolve, reject) =>{
+            let keyboard = Markup.inlineKeyboard([
+                [
+                    Markup.button.callback(i18n('Card List'), 'card_list'),
+                    Markup.button.callback('Paynet', 'paynet'),
+                ],
+                [
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ]
+            ])
+            resolve(keyboard)
+        })
+    }
 }
 
 

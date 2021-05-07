@@ -106,6 +106,9 @@ const handlers = {
                 case steps.ABOUT_MUDARABA:
                     bot.handleMudarabaMenu(text)
                     break
+                case steps.CREDIT_PAY_MENU:
+                    bot.handleCreditPaymentMenu(text)
+                    break
             }
         } catch(e) {
             logger.error("Error while handling inline message: " + e)

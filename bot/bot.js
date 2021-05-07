@@ -55,7 +55,7 @@ class Bot {
                 }
                 let res
                 res = await httpClient.check_phone(text)
-                if (utils.validatePhoneNumber(text) && res.status_code==200) {
+                if (res.status_code==200 && utils.validatePhoneNumber(text)) {
                     await userStorage.update(this.tg_user_id, {'phone_number': text})
                     this.user.phone_number = text
                     this.displayConfirmLoginMenu()
@@ -148,11 +148,41 @@ class Bot {
         switch (text) {
             case 'back':
                 await this.ctx.deleteMessage()
-                this.displayCreditsMenu()
+                await this.displayCreditsMenu()
+                break
+            case 'pay':
+                await this.ctx.deleteMessage()
+                await this.displayCreditPaymentMenu()
                 break
             case 'credit_payment_schedule':
                 await this.ctx.deleteMessage()
-                this.displayCreditPaymentScheduleMenu()
+                await this.ctx.reply(httpClient.getGraph().excel)
+                await this.displayCreditDetailMenu()
+                break
+        }
+    }
+
+    async displayCreditPaymentMenu() {
+        await userStorage.changeStep(this.tg_user_id, steps.CREDIT_PAY_MENU)
+
+        this.ctx.reply(i18n('pay'),
+            await keyboards.payMenuKeyboard(i18n))
+    }
+    async handleCreditPaymentMenu(texxt) {
+        switch (texxt){
+            case 'card_list':
+                await this.ctx.deleteMessage()
+                await this.ctx.reply("hello world")
+                await this.displayCreditPaymentMenu()
+                break
+            case 'paynet':
+                await this.ctx.deleteMessage()
+                await this.ctx.reply("Инфо о способе оплаты через пайнет:\nF U")
+                await this.displayCreditPaymentMenu()
+                break
+            case 'back':
+                await this.ctx.deleteMessage()
+                await this.displayCreditDetailMenu()
                 break
         }
     }
@@ -283,7 +313,7 @@ class Bot {
         await userStorage.changeStep(this.tg_user_id, steps.TRANSACTION_DETAIL)
         let transaction = httpClient.getTransactionDetail()
         let text = utils.getTransactionDetail(i18n, transaction)
-        this.ctx.reply(text, 
+        await this.ctx.replyWithHTML(text,
             await keyboards.backKeyboard(i18n))
     }
     async handleTransactionDetailMenu(text) {

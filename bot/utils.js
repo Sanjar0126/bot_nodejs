@@ -20,6 +20,15 @@ const utils = {
             '<b>' + i18n('Current month amount') + ':</b> ' + credit['current_month_amount'] + ' ' + i18n('sum') + '\n'
             return text
     },
+    getTransactionDetail(i18n, trans) {
+        let text = i18n('Transaction detail') + '\n\n' +
+            '<b>' + i18n('Contract number') + ':</b> ' + trans['contract_number'] + '\n' +
+            '<b>'+ i18n('Transaction amount') +':</b> ' + trans['amount'] + '\n' +
+            '<b>'+ i18n('Transaction month') +':</b> ' + trans['month'] + '\n' +
+            '<b>'+ i18n('Transaction date') +':</b> ' + trans['date'] + '\n' +
+            '<b>'+ i18n('Payment type') +':</b> ' + i18n(trans['payment_type']) + '\n'
+            return text
+    },
     getCreditPaymentScheduleText(i18n, creditPaymentSchedule) {
         let text = i18n('Credit payment schedule') +
             ' (' + i18n('month') + ', ' + i18n('amount') + ', ' + i18n('status') + ')\n'
