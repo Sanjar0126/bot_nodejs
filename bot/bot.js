@@ -148,16 +148,16 @@ class Bot {
         switch (text) {
             case 'back':
                 await this.ctx.deleteMessage()
-                await this.displayCreditsMenu()
+                this.displayCreditsMenu()
                 break
             case 'pay':
                 await this.ctx.deleteMessage()
-                await this.displayCreditPaymentMenu()
+                this.displayCreditPaymentMenu()
                 break
             case 'credit_payment_schedule':
                 await this.ctx.deleteMessage()
                 await this.ctx.reply(httpClient.getGraph().excel)
-                await this.displayCreditDetailMenu()
+                this.displayCreditDetailMenu()
                 break
         }
     }
@@ -173,16 +173,16 @@ class Bot {
             case 'card_list':
                 await this.ctx.deleteMessage()
                 await this.ctx.reply("hello world")
-                await this.displayCreditPaymentMenu()
+                this.displayCreditPaymentMenu()
                 break
             case 'paynet':
                 await this.ctx.deleteMessage()
                 await this.ctx.reply("Инфо о способе оплаты через пайнет:\nF U")
-                await this.displayCreditPaymentMenu()
+                this.displayCreditPaymentMenu()
                 break
             case 'back':
                 await this.ctx.deleteMessage()
-                await this.displayCreditDetailMenu()
+                this.displayCreditDetailMenu()
                 break
         }
     }
