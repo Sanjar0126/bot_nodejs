@@ -161,30 +161,32 @@ class Bot {
                 break
         }
     }
-
     async displayCreditPaymentMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_PAY_MENU)
-
         this.ctx.reply(i18n('pay'),
             await keyboards.payMenuKeyboard(i18n))
     }
     async handleCreditPaymentMenu(texxt) {
         switch (texxt){
             case 'card_list':
-                await this.ctx.deleteMessage()
+                this.ctx.deleteMessage()
                 await this.ctx.reply("hello world")
-                this.displayCreditPaymentMenu()
+                await this.displayBankCardMenu()
                 break
             case 'paynet':
-                await this.ctx.deleteMessage()
+                this.ctx.deleteMessage()
                 await this.ctx.reply("Инфо о способе оплаты через пайнет:\nF U")
-                this.displayCreditPaymentMenu()
+                await this.displayCreditPaymentMenu()
                 break
             case 'back':
-                await this.ctx.deleteMessage()
-                this.displayCreditDetailMenu()
+                this.ctx.deleteMessage()
+                await this.displayCreditDetailMenu()
                 break
         }
+    }
+
+    async displayBankCardMenu(){
+
     }
 
     async displayCreditPaymentScheduleMenu() {

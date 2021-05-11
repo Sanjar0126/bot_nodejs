@@ -122,8 +122,8 @@ let languages = {
         'ru': "✅ Подтвердить",
     },
     'btn_change_language': {
-        'uz': "🌐 Til/Язык 🇷🇺",
-        'ru': "🌐 Til/Язык 🇺🇿",
+        'uz': "🌐 Til/Язык 🇺🇿",
+        'ru': "🌐 Til/Язык 🇷🇺",
     },
     'btn_credit_payment_schedule': {
         'uz': '🗓 To\'lov jadvali',
