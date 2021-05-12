@@ -97,29 +97,7 @@ const httpClient = {
         return credit
     },
     getTransactions() {
-        let transactions = [
-            {
-                'contract_number': '12432423',
-                'amount': 100000,
-                'month': 3,
-                'date': '2021-03-01',
-                'payment_type': 'payme',
-            },
-            {
-                'contract_number': '12432423',
-                'amount': 100000,
-                'month': 2,
-                'date': '2021-02-01',
-                'payment_type': 'payme',
-            },
-            {
-                'contract_number': '12432423',
-                'amount': 100000,
-                'month': 1,
-                'date': '2021-01-01',
-                'payment_type': 'payme',
-            }
-        ]
+        let transactions
 
         return transactions
     },
