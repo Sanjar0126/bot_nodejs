@@ -55,10 +55,10 @@ const keyboards = {
     creditsMenuKeyboard: (i18n, credits) => {
         return new Promise((resolve, reject) => {
             let arr = [];
-            credits.forEach(credit => {
-                let text = i18n('Contract number') + ' - ' + credit['credit_number']
+            credits.result.data.installment_list.forEach(credit => {
+                let text = i18n('Contract number') + ' - ' + credit['contract_number']
                 arr.push([
-                    Markup.button.callback(text, 'credit_id' + credit['credit_number'])
+                    Markup.button.callback(text, credit['contract_number'])
                 ])
             })
 

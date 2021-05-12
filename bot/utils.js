@@ -13,12 +13,19 @@ const utils = {
     },
     getCreditDetailText(i18n, credit) {
         let text = i18n('Credit detail') + '\n\n' +
-            '<b>' + i18n('Credit number') + ':</b> ' + credit['credit_number'] + '\n' + 
-            '<b>' + i18n('Credit amount') + ':</b> ' + credit['amount'] + ' ' + i18n('sum') + '\n' +
-            '<b>' + i18n('Payment status') + ':</b> ' + i18n(credit['payment_status']) + '\n' +
+            '<b>' + i18n('Credit number') + ':</b> ' + credit['contract_number'] + '\n' +
+            '<b>' + i18n('Credit amount') + ':</b> ' + credit['installment_amount'] + ' ' + i18n('sum') + '\n' +
+            '<b>' + i18n('Product price') + ':</b> ' + credit['total_price'] + ' ' + i18n('sum') + '\n' +
+            '<b>' + i18n('Payment status') + ':</b> ' + i18n(credit['status']) + '\n' +
             '<b>' + i18n('Credit amount left') + ':</b> ' + credit['left'] + ' ' + i18n('sum') + '\n'
-            '<b>' + i18n('Current month amount') + ':</b> ' + credit['current_month_amount'] + ' ' + i18n('sum') + '\n'
-            return text
+        let prod_txt=''
+        credit.products.forEach(product =>{
+            prod_txt = prod_txt + '<b>' + i18n('ProductTovar') +  '-1 :</b>\n' +
+                '<b>'+ i18n('Tovar Name') +':</b> ' + product['name'] + '\n' +
+                '<b>'+ i18n('Tovar Price') +':</b> ' + product['price'] + '\n' +
+                '<b>'+ i18n('Tovar Count') +':</b> ' + product['count'] + '\n'
+        })
+            return text+prod_txt
     },
     getTransactionDetail(i18n, trans) {
         let text = i18n('Transaction detail') + '\n\n' +

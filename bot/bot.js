@@ -81,8 +81,10 @@ class Bot {
                 break
             default:
                 let res = await httpClient.confirmLogin(this.user.phone_number, text)
-                if (res.status.status == 200) {
-                    await userStorage.update(this.tg_user_id, {is_active: true})
+                if (res.response.status == 200) {
+                    await userStorage.update(this.tg_user_id, {is_active: true,
+                                                                     access_token: res.response.data.access_token,
+                                                                     refresh_token: res.response.data.refresh_token})
                     this.displayMainMenu()
                 } else {
                     await this.ctx.reply(i18n("Incorrect code"))
@@ -121,7 +123,7 @@ class Bot {
     async displayCreditsMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.CREDITS)
         
-        let credits = httpClient.getCredits()
+        let credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token)
         this.ctx.reply(i18n("Credits"), 
             await keyboards.creditsMenuKeyboard(i18n, credits))
     }
@@ -133,19 +135,31 @@ class Bot {
                 break
             default:
                 await this.ctx.deleteMessage()
-                this.displayCreditDetailMenu()
+                this.displayCreditDetailMenu(text)
         }
     }
 
-    async displayCreditDetailMenu() {
+    async displayCreditDetailMenu(contract_number) {
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_DETAIL)
-        let credit = httpClient.getCreditDetail()
+        let credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token)
+        let credit
+        try {
+            credits.result.data.installment_list.forEach(res => {
+                if (res['contract_number'] == contract_number) {
+                    credit = res
+                }
+            })
+        }catch (e) {
+            await this.ctx.deleteMessage()
+            this.displayCreditsMenu()
+        }
         let text = utils.getCreditDetailText(i18n, credit)
         this.ctx.replyWithHTML(text, 
             await keyboards.creditDetailMenuKeyboard(i18n))
     }
     async handleCreditDetailMenu(text) {
         switch (text) {
+
             case 'back':
                 await this.ctx.deleteMessage()
                 this.displayCreditsMenu()
@@ -161,6 +175,8 @@ class Bot {
                 break
         }
     }
+
+
     async displayCreditPaymentMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_PAY_MENU)
         this.ctx.reply(i18n('pay'),

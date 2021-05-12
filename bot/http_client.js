@@ -1,5 +1,8 @@
 const axios = require('axios');
 const logger = require("../config/logger.js");
+SMS_CODE = 'https://customer-user.api.iman.uz/v1/sms-code'
+LOGIN_URL = 'https://customer-user.api.iman.uz/v1/login'
+GET_INSTALLMENTS = 'https://customer-user.api.iman.uz/v1/customer/installments?phone_number='
 
 const httpClient = {
 
@@ -7,7 +10,7 @@ const httpClient = {
         let phone = text.replace('+', '')
         let status
         try {
-            let res = await axios.post('https://customer-user.api.iman.uz/v1/sms-code', {
+            let res = await axios.post(SMS_CODE, {
                 phone_number: phone
             })
             console.log(res.status);
@@ -26,11 +29,11 @@ const httpClient = {
         let phone = text.replace('+', '')
 
         try {
-            let res = await axios.post('https://customer-user.api.iman.uz/v1/login', {
+            let res = await axios.post(LOGIN_URL, {
                 "code": parseInt(code, 10), "phone_number": phone.toString()
             })
             return {
-                status: res
+                response: res
             }
         }catch (e) {
             return{
@@ -39,32 +42,22 @@ const httpClient = {
         }
 
     },
-    getCredits() {
-        let credits = [
-            {
-                'credit_number': '12432423',
-                'amount': 600000,
-                'payment_status': 'pending',
-                'left':300000,
-                'current_month_amount': 100000
-            },
-            {
-                'credit_number': '12432478',
-                'amount': 1800000,
-                'payment_status': 'pending',
-                'left': 900000,
-                'current_month_amount': 300000
-            },
-            {
-                'credit_number': '982432423',
-                'amount': 1200000,
-                'payment_status': 'pending',
-                'left':800000,
-                'current_month_amount': 200000
+    async getCredits(phone, access_toke) {
+        let phone_send = phone.replace('+', '')
+        try {
+            let credits = await axios.get(GET_INSTALLMENTS + phone_send, {
+                headers: {
+                    Authorization: access_toke,
+                }
+            })
+            return {
+                result: credits
             }
-        ]
-
-        return credits
+        }catch (e) {
+            return{
+                result: 500
+            }
+        }
     },
     getCreditDetail() {
         let credit = {

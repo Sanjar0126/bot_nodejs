@@ -63,6 +63,34 @@ let languages = {
         'uz': "Rasrochka summasi",
         'ru': "Сумма рассрочки",
     },
+    'Tovar Name': {
+        'uz': 'Tovar nomi',
+        'ru': 'Название товара'
+    },
+    'Tovar Price': {
+        'uz': 'Tovar narxi',
+        'ru': 'Цена товара'
+    },
+    'Tovar Count': {
+        'uz': 'Tovar miqdori',
+        'ru': 'Количество товара'
+    },
+    'products': {
+        'uz': 'Olingan tovarlar',
+        'ru': 'Купленные товары'
+    },
+    'ProductTovar': {
+        'uz': 'Tovar',
+        'ru': 'Товар'
+    },
+    'Product price': {
+        'uz': "Tovar summasi",
+        'ru': "Сумма товара",
+    },
+    'accept_by_customer':{
+        'uz': 'Qabul qilindi',
+        'ru': 'Подтверждено'
+    },
     'Payment status': {
         'uz': "To'lov statusi",
         'ru': "Статус платежа",
@@ -84,7 +112,7 @@ let languages = {
         'ru': "статус",
     },
     "Current month amount": {
-        'uz': "Hozirgi oy uchun to'lov",
+        'uz': "Oy uchun to'lov",
         'ru': "Сумма текущего месяца",
     },
     "sum": {
