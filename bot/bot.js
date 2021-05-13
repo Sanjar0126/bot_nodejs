@@ -171,6 +171,7 @@ class Bot {
                 this.displayCreditPaymentMenu(text[1])
                 break
             case 'credit_payment_schedule':
+                await this.ctx.deleteMessage()
                 await this.ctx.reply(httpClient.getGraph().excel)
                 this.displayCreditDetailMenu(text[1])
                 break
