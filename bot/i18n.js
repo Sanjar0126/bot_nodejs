@@ -39,13 +39,21 @@ let languages = {
         'uz': 'Transaksiya summasi',
         'ru': 'Сумма трансакции'
     },
-    'Transaction month': {
-        'uz': 'Transaksiya oyi',
-        'ru': 'Месяц трансакции'
+    'trans_status': {
+        'uz': 'Transaksiya statusi',
+        'ru': 'Статус транзакции'
+    },
+    'repayment_schedule_date': {
+        'uz': 'repayment_schedule_date',
+        'ru': 'repayment_schedule_date'
+    },
+    'update_at': {
+        'uz': "Yangilangan sanasi",
+        'ru': 'Дата обновление'
     },
     'Transaction date': {
-        'uz': 'Transaksiya sanasi',
-        'ru': 'Число трансакции'
+        'uz': 'Transaksiya yaratilgan sanasi',
+        'ru': 'Число созданной трансакции'
     },
     'Payment type': {
         'uz': "To'lov turi",
@@ -88,8 +96,8 @@ let languages = {
         'ru': "Сумма товара",
     },
     'accept_by_customer':{
-        'uz': 'Qabul qilindi',
-        'ru': 'Подтверждено'
+        'uz': '✅ Qabul qilindi',
+        'ru': '✅ Подтверждено'
     },
     'Payment status': {
         'uz': "To'lov statusi",
@@ -97,7 +105,15 @@ let languages = {
     },
     "Credit amount left": {
         'uz': "Qolgan to'lov miqdori",
-        'ru': "Осталась сумма кредита",
+        'ru': "Общий остаток",
+    },
+    'Paid price': {
+        'uz': "To'langan miqdor",
+        'ru': 'Оплаченный стоимость'
+    },
+    'Current month dept': {
+        'uz': 'Hozirgi oy qarzi',
+        'ru': 'Долг текушого месяца'
     },
     "amount": {
         'uz': "summa",
@@ -168,6 +184,18 @@ let languages = {
     'Musavama': {
         'uz': 'Musavama',
         'ru': 'Мусавама'
+    },
+    'model': {
+        'uz': 'Tovar modeli',
+        'ru': 'Модел товара'
+    },
+    'scoring_status': {
+        'uz': 'Scoring statusi',
+        'ru': 'Cтатус скоринга'
+    },
+    'serial_number': {
+        'uz': 'Tovar seriya raqami',
+        'ru': 'Серийный номер товара'
     },
     'Mudaraba': {
         'uz': 'Mudaraba',

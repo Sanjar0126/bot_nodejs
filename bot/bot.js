@@ -4,6 +4,8 @@ const steps = require('../config/bot_steps')
 const utils = require('./utils')
 const httpClient = require('./http_client')
 const {i18n, activateLanguage} = require('./i18n')
+var credits
+var transactions;
 
 class Bot {
     constructor(ctx) {
@@ -123,7 +125,7 @@ class Bot {
     async displayCreditsMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.CREDITS)
         
-        let credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token)
+        credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token)
         this.ctx.reply(i18n("Credits"), 
             await keyboards.creditsMenuKeyboard(i18n, credits))
     }
@@ -141,7 +143,7 @@ class Bot {
 
     async displayCreditDetailMenu(contract_number) {
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_DETAIL)
-        let credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token)
+        // let credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token)
         let credit
         try {
             credits.result.data.installment_list.forEach(res => {
@@ -150,8 +152,8 @@ class Bot {
                 }
             })
         }catch (e) {
-            await this.ctx.deleteMessage()
             this.displayCreditsMenu()
+            return
         }
         let text = utils.getCreditDetailText(i18n, credit)
         this.ctx.replyWithHTML(text, 
@@ -310,7 +312,7 @@ class Bot {
 
     async displayTransactionsMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.TRANSACTIONS)
-        let transactions = httpClient.getTransactions()
+        transactions = await httpClient.getTransactions(this.user.phone_number, this.user.access_token)
         this.ctx.reply(i18n('Transactions'), 
             await keyboards.transactionsMenuKeyboard(i18n, transactions))
     }
@@ -322,14 +324,25 @@ class Bot {
                 break
             default:
                 await this.ctx.deleteMessage()
-                this.displayTransactionDetailMenu()
+                this.displayTransactionDetailMenu(text)
                 break
         }
     }
 
-    async displayTransactionDetailMenu() {
+    async displayTransactionDetailMenu(transaction_id) {
         await userStorage.changeStep(this.tg_user_id, steps.TRANSACTION_DETAIL)
-        let transaction = httpClient.getTransactionDetail()
+        let transaction
+        try {
+            credits.result.data.bond_payments.forEach(res => {
+                if (res['transaction_id'] == transaction_id) {
+                    transaction = res
+                }
+            })
+        }catch (e) {
+            this.ctx.return("Empty")
+            this.displayTransactionsMenu()
+            return
+        }
         let text = utils.getTransactionDetail(i18n, transaction)
         await this.ctx.replyWithHTML(text,
             await keyboards.backKeyboard(i18n))

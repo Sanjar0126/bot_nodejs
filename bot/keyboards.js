@@ -89,10 +89,10 @@ const keyboards = {
         transactionsMenuKeyboard: (i18n, transactions) => {
         return new Promise((resolve, reject) => {
             let arr = [];
-            transactions.forEach(transaction => {
-                let text = i18n('Contract number') + ' - ' + transaction['contract_number']
+            transactions.result.data.bond_payments.forEach(transaction => {
+                let text = i18n('Contract number') + ' - ' + transaction['transaction_id']
                 arr.push([
-                    Markup.button.callback(text, 'credit_id' + transaction['contract_number'])
+                    Markup.button.callback(text, transaction['transaction_id'])
                 ])
             })
 
