@@ -157,48 +157,48 @@ class Bot {
         }
         let text = utils.getCreditDetailText(i18n, credit)
         this.ctx.replyWithHTML(text, 
-            await keyboards.creditDetailMenuKeyboard(i18n))
+            await keyboards.creditDetailMenuKeyboard(i18n, contract_number))
     }
-    async handleCreditDetailMenu(text) {
-        switch (text) {
-
+    async handleCreditDetailMenu(res) {
+        let text = res.split('/', 2)
+        switch (text[0]) {
             case 'back':
                 await this.ctx.deleteMessage()
-                this.displayCreditsMenu()
+                this.displayCreditsMenu(text[1])
                 break
             case 'pay':
                 await this.ctx.deleteMessage()
-                this.displayCreditPaymentMenu()
+                this.displayCreditPaymentMenu(text[1])
                 break
             case 'credit_payment_schedule':
-                await this.ctx.deleteMessage()
                 await this.ctx.reply(httpClient.getGraph().excel)
-                this.displayCreditDetailMenu()
+                this.displayCreditDetailMenu(text[1])
                 break
         }
     }
 
 
-    async displayCreditPaymentMenu() {
+    async displayCreditPaymentMenu(contract_number) {
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_PAY_MENU)
         this.ctx.reply(i18n('pay'),
-            await keyboards.payMenuKeyboard(i18n))
+            await keyboards.payMenuKeyboard(i18n, contract_number))
     }
-    async handleCreditPaymentMenu(texxt) {
-        switch (texxt){
+    async handleCreditPaymentMenu(res) {
+        let text = res.split('/', 2)
+        switch (text[0]){
             case 'card_list':
                 this.ctx.deleteMessage()
                 await this.ctx.reply("hello world")
-                await this.displayBankCardMenu()
+                await this.displayBankCardMenu(text[1])
                 break
             case 'paynet':
                 this.ctx.deleteMessage()
                 await this.ctx.reply("Инфо о способе оплаты через пайнет:\nF U")
-                await this.displayCreditPaymentMenu()
+                await this.displayCreditPaymentMenu(text[1])
                 break
             case 'back':
                 this.ctx.deleteMessage()
-                await this.displayCreditDetailMenu()
+                await this.displayCreditDetailMenu(text[1])
                 break
         }
     }

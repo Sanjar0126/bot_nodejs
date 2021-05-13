@@ -71,12 +71,12 @@ const keyboards = {
         })
     },
 
-    creditDetailMenuKeyboard: (i18n) => {
+    creditDetailMenuKeyboard: (i18n, contract_number) => {
         return new Promise((resolve, reject) => {
             let keyboard = Markup.inlineKeyboard([
                 [
-                    Markup.button.callback(i18n('pay'), 'pay'),
-                    Markup.button.callback(i18n('btn_credit_payment_schedule'), 'credit_payment_schedule'),
+                    Markup.button.callback(i18n('pay'), 'pay/'+contract_number),
+                    Markup.button.callback(i18n('btn_credit_payment_schedule'), 'credit_payment_schedule/'+contract_number),
                 ],
                 [
                     Markup.button.callback(i18n('btn_back'), 'back'),
@@ -124,15 +124,15 @@ const keyboards = {
         })
     },
 
-    payMenuKeyboard: (i18n) =>{
+    payMenuKeyboard: (i18n,contract_number) =>{
         return new Promise((resolve, reject) =>{
             let keyboard = Markup.inlineKeyboard([
                 [
-                    Markup.button.callback(i18n('Card List'), 'card_list'),
-                    Markup.button.callback('Paynet', 'paynet'),
+                    Markup.button.callback(i18n('Card List'), 'card_list/'+contract_number),
+                    Markup.button.callback('Paynet', 'paynet/'+contract_number),
                 ],
                 [
-                    Markup.button.callback(i18n('btn_back'), 'back')
+                    Markup.button.callback(i18n('btn_back'), 'back/'+contract_number)
                 ]
             ])
             resolve(keyboard)
