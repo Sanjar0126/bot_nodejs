@@ -14,6 +14,7 @@ const keyboards = {
         return new Promise((resolve, reject) => {
             let keyboard = Markup.inlineKeyboard([
                 Markup.button.callback(i18n('btn_back'), 'back'),
+                Markup.button.callback(i18n('menu_back'), 'menu_back')
             ])
             resolve(keyboard)
         }) 
@@ -80,6 +81,7 @@ const keyboards = {
                 ],
                 [
                     Markup.button.callback(i18n('btn_back'), 'back'),
+                    Markup.button.callback(i18n('menu_back'), 'menu_back')
                 ]
             ])
             resolve(keyboard)
@@ -132,7 +134,8 @@ const keyboards = {
                     Markup.button.callback('Paynet', 'paynet/'+contract_number),
                 ],
                 [
-                    Markup.button.callback(i18n('btn_back'), 'back/'+contract_number)
+                    Markup.button.callback(i18n('btn_back'), 'back/'+contract_number),
+                    Markup.button.callback(i18n('menu_back'), 'menu_back/'+contract_number)
                 ]
             ])
             resolve(keyboard)
@@ -143,7 +146,8 @@ const keyboards = {
         return new Promise((resolve, reject) =>{
             let keyboard = Markup.inlineKeyboard([
                 [
-                    Markup.button.callback(i18n('btn_back'), 'back/'+contract_number)
+                    Markup.button.callback(i18n('btn_back'), 'back/'+contract_number),
+                    Markup.button.callback(i18n('menu_back'), 'menu_back/'+contract_number)
                 ]
             ])
             resolve(keyboard)

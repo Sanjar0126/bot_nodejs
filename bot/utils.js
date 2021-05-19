@@ -59,13 +59,16 @@ const utils = {
 
 
         let prod_txt=''
+        let length_product = credit.products.length
+        let index_product=1
         credit.products.forEach(product =>{
-            prod_txt = prod_txt + '<b>' + i18n('ProductTovar') +  '-1 :</b>\n' +
+            prod_txt = prod_txt + '<b><i>' + i18n('ProductTovar') +  '-'+index_product+ ':</i></b>\n' +
                 '<b>'+ i18n('Tovar Name') +':</b> ' + product['name'] + '\n' +
-                '<b>'+ i18n('Tovar Price') +':</b> ' + product['price'] + '\n' +
+                '<b>'+ i18n('Tovar Price') +':</b> ' + product['price'] + i18n('sum') +'\n' +
                 '<b>'+ i18n('Tovar Count') +':</b> ' + product['count'] + '\n' +
                 '<b>'+ i18n('model') +':</b> ' + product['model'] + '\n' +
                 '<b>'+ i18n('serial_number') +':</b> ' + product['serial_number'] + '\n'
+            index_product++
         })
             return text+dept_text+prod_txt
     },

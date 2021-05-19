@@ -135,6 +135,10 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayMainMenu()
                 break
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
+                break
             default:
                 await this.ctx.deleteMessage()
                 this.displayCreditDetailMenu(text)
@@ -165,6 +169,10 @@ class Bot {
             case 'back':
                 await this.ctx.deleteMessage()
                 this.displayCreditsMenu(text[1])
+                break
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
                 break
             case 'pay':
                 await this.ctx.deleteMessage()
@@ -203,6 +211,10 @@ class Bot {
                 this.ctx.deleteMessage()
                 await this.displayCreditDetailMenu(text[1])
                 break;
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
+                break
         }
     }
 
@@ -228,6 +240,10 @@ class Bot {
                 this.ctx.deleteMessage()
                 await this.displayCreditDetailMenu(text[1])
                 break
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
+                break
         }
     }
 
@@ -248,6 +264,10 @@ class Bot {
             case 'back':
                 await this.ctx.deleteMessage()
                 this.displayCreditDetailMenu()
+                break
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
                 break
         }
     }
@@ -280,6 +300,10 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayMainMenu()
                 break
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
+                break
         }
     }
     async displayMissionMenu() {
@@ -293,6 +317,10 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayAboutMenu()
                 break;
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
+                break
         }
     }
 
@@ -307,6 +335,10 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayAboutMenu()
                 break;
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
+                break
         }
     }
 
@@ -321,6 +353,10 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayAboutMenu()
                 break;
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
+                break
         }
     }
 
@@ -335,6 +371,10 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayAboutMenu()
                 break;
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
+                break
         }
     }
 
@@ -347,6 +387,10 @@ class Bot {
     async handleTransactionsMenu(text) {
         switch (text) {
             case 'back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
+                break
+            case 'menu_back':
                 await this.ctx.deleteMessage()
                 this.displayMainMenu()
                 break
@@ -381,6 +425,10 @@ class Bot {
             case 'back':
                 await this.ctx.deleteMessage()
                 this.displayTransactionsMenu()
+                break
+            case 'menu_back':
+                await this.ctx.deleteMessage()
+                this.displayMainMenu()
                 break
         }
     }

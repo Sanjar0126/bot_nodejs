@@ -72,15 +72,15 @@ let languages = {
         'ru': "Сумма рассрочки",
     },
     'Tovar Name': {
-        'uz': 'Tovar nomi',
+        'uz': 'Mahsulot nomi',
         'ru': 'Название товара'
     },
     'Tovar Price': {
-        'uz': 'Tovar narxi',
+        'uz': 'Mahsulot narxi',
         'ru': 'Цена товара'
     },
     'Tovar Count': {
-        'uz': 'Tovar miqdori',
+        'uz': 'Mahsulot miqdori',
         'ru': 'Количество товара'
     },
     'done':{
@@ -88,15 +88,15 @@ let languages = {
         'ru': 'Выполнено'
     },
     'products': {
-        'uz': 'Olingan tovarlar',
+        'uz': 'Olingan mahsulotlar',
         'ru': 'Купленные товары'
     },
     'ProductTovar': {
-        'uz': 'Tovar',
+        'uz': 'Mahsulot',
         'ru': 'Товар'
     },
     'Product price': {
-        'uz': "Tovar summasi",
+        'uz': "Mahsulot summasi",
         'ru': "Сумма товара",
     },
     'accept_by_customer':{
@@ -214,7 +214,7 @@ let languages = {
         'ru': 'Мусавама'
     },
     'model': {
-        'uz': 'Tovar modeli',
+        'uz': 'Mahsulot modeli',
         'ru': 'Модел товара'
     },
     'scoring_status': {
@@ -222,7 +222,7 @@ let languages = {
         'ru': 'Cтатус скоринга'
     },
     'serial_number': {
-        'uz': 'Tovar seriya raqami',
+        'uz': 'Mahsulot seriya raqami',
         'ru': 'Серийный номер товара'
     },
     'Mudaraba': {
@@ -324,6 +324,10 @@ let languages = {
         'uz': 'Dekabr qarzi',
         'ru': 'Долг Декабря'
     },
+    'menu_back': {
+        'uz': 'Asosiy menuga qaytish',
+        'ru': 'Вернутся в главную меню'
+    }
 }
 
 let language = 'ru'
