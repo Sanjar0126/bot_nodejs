@@ -108,8 +108,8 @@ let languages = {
         'ru': "Статус платежа",
     },
     "Credit amount left": {
-        'uz': "Qolgan to'lov miqdori",
-        'ru': "Общий остаток",
+        'uz': "Ortiqcha to'lov",
+        'ru': "Избыточный остаток",
     },
     'Paid price': {
         'uz': "To'langan miqdor",
