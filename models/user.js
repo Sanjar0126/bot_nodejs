@@ -39,6 +39,7 @@ const UserSchema = new mongoose.Schema({
             steps.CREDITS,
             steps.CREDIT_DETAIL,
             steps.CREDIT_PAY_MENU,
+            steps.CREDIT_GRAPH,
 
             steps.PAYMENT,
             steps.SELECT_PAYMENT_TYPE,

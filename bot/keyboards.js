@@ -86,13 +86,13 @@ const keyboards = {
         })
     },
 
-        transactionsMenuKeyboard: (i18n, transactions) => {
+    transactionsMenuKeyboard: (i18n, transactions) => {
         return new Promise((resolve, reject) => {
             let arr = [];
             transactions.result.data.bond_payments.forEach(transaction => {
-                let text = i18n('Contract number') + ' - ' + transaction['transaction_id']
+                let text = i18n('Contract number') + ' - ' + transaction['bond_id']
                 arr.push([
-                    Markup.button.callback(text, transaction['transaction_id'])
+                    Markup.button.callback(text, transaction['guid'])
                 ])
             })
 
@@ -137,7 +137,18 @@ const keyboards = {
             ])
             resolve(keyboard)
         })
-    }
+    },
+
+    graphMenuKeyboard: (i18n, contract_number) =>{
+        return new Promise((resolve, reject) =>{
+            let keyboard = Markup.inlineKeyboard([
+                [
+                    Markup.button.callback(i18n('btn_back'), 'back/'+contract_number)
+                ]
+            ])
+            resolve(keyboard)
+        })
+    },
 }
 
 

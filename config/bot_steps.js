@@ -14,6 +14,7 @@ const botSteps = {
     CREDIT_DETAIL: "credit_detail",
     CREDIT_PAYMENT_SCHEDULE: "credit_payment_schedule",
     CREDIT_PAY_MENU: "credit_pay_menu",
+    CREDIT_GRAPH: "credit_graph",
 
     PAYMENT: "payment",
     SELECT_PAYMENT_TYPE: "select_payment_type",

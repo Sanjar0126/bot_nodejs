@@ -83,6 +83,10 @@ let languages = {
         'uz': 'Tovar miqdori',
         'ru': 'Количество товара'
     },
+    'done':{
+        'uz': 'Выполнено',
+        'ru': 'Выполнено'
+    },
     'products': {
         'uz': 'Olingan tovarlar',
         'ru': 'Купленные товары'
@@ -113,7 +117,11 @@ let languages = {
     },
     'Current month dept': {
         'uz': 'Hozirgi oy qarzi',
-        'ru': 'Долг текушого месяца'
+        'ru': 'Долг текущего месяца'
+    },
+    'Month debt': {
+        'uz': ' qarzi',
+        'ru': 'Долг '
     },
     "amount": {
         'uz': "summa",
@@ -131,6 +139,18 @@ let languages = {
         'uz': "Oy uchun to'lov",
         'ru': "Сумма текущего месяца",
     },
+    'repayment date': {
+        'uz': "To'lov sa'nasi",
+        'ru': 'Дата оплаты'
+    },
+    'repayment amount': {
+        'uz': "To'lov miqdori",
+        'ru': "Сумма оплаты"
+    },
+    'repayment status': {
+        'uz': "To'lov statusi",
+        'ru': 'Статус оплаты'
+    },
     "sum": {
         'uz': "so'm",
         'ru': "сум",
@@ -141,7 +161,15 @@ let languages = {
     },
     "paid": {
         'uz': "✅ To'langan",
-        'ru': "✅ Оплаченный",
+        'ru': "✅ Оплачено",
+    },
+    "not_paid": {
+        'uz': "❌ To'lanmagan",
+        'ru': "❌ Не oплачено",
+    },
+    "Credit Graph": {
+        'uz': "To'lov grafigi",
+        'ru': 'График платежей'
     },
     "cancelled": {
         'uz': "❌ Bekor qilingan",
@@ -239,7 +267,63 @@ let languages = {
     'Card List':{
         'uz': '💳 Karta ro‘yxati',
         'ru': '💳 Список карт'
-    }
+    },
+    'card': {
+        'uz': '💳 Karta',
+        'ru': '💳 По карте'
+    },
+    'success': {
+        'uz': 'Succeed',
+        'ru': 'Успешно'
+    },
+    '0m': {
+        'uz': 'Yanvar qarzi',
+        'ru': 'Долг Января'
+    },
+    '1m': {
+        'uz': 'Fevral qarzi',
+        'ru': 'Долг Февраля'
+    },
+    '2m': {
+        'uz': 'Mart qarzi',
+        'ru': 'Долг Марта'
+    },
+    '3m': {
+        'uz': 'Aprel qarzi',
+        'ru': 'Долг Апреля'
+    },
+    '4m': {
+        'uz': 'May qarzi',
+        'ru': 'Долг Мая'
+    },
+    '5m': {
+        'uz': 'Iyun qarzi',
+        'ru': 'Долг Июня'
+    },
+    '6m': {
+        'uz': 'Iyul qarzi',
+        'ru': 'Долг Июля'
+    },
+    '7m': {
+        'uz': 'Avgust qarzi',
+        'ru': 'Долг Августа'
+    },
+    '8m': {
+        'uz': 'Sentabr qarzi',
+        'ru': 'Долг Сентября'
+    },
+    '9m': {
+        'uz': 'Oktabr qarzi',
+        'ru': 'Долг Октября'
+    },
+    '10m': {
+        'uz': 'Noyabr qarzi',
+        'ru': 'Долг Ноября'
+    },
+    '11m': {
+        'uz': 'Dekabr qarzi',
+        'ru': 'Долг Декабря'
+    },
 }
 
 let language = 'ru'

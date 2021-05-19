@@ -109,6 +109,9 @@ const handlers = {
                 case steps.CREDIT_PAY_MENU:
                     bot.handleCreditPaymentMenu(text)
                     break
+                case steps.CREDIT_GRAPH:
+                    bot.handleCreditGraph(text)
+                    break
             }
         } catch(e) {
             logger.error("Error while handling inline message: " + e)

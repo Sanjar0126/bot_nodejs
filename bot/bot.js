@@ -172,12 +172,39 @@ class Bot {
                 break
             case 'credit_payment_schedule':
                 await this.ctx.deleteMessage()
-                await this.ctx.reply(httpClient.getGraph().excel)
-                this.displayCreditDetailMenu(text[1])
+                this.displayCreditGraph(text[1])
                 break
         }
     }
 
+    async displayCreditGraph(contract_number){
+        await userStorage.changeStep(this.tg_user_id, steps.CREDIT_GRAPH)
+        let credit
+        try {
+            credits.result.data.installment_list.forEach(res => {
+                if (res['contract_number'] == contract_number) {
+                    credit = res
+                }
+            })
+        }catch (e) {
+            await this.ctx.reply('error occurred')
+            this.displayCreditsMenu()
+            return
+        }
+        let text = utils.getCreditGraph(i18n, credit)
+        this.ctx.replyWithHTML(text,
+            await keyboards.graphMenuKeyboard(i18n, contract_number))
+    }
+
+    async handleCreditGraph(res){
+        let text = res.split('/', 2)
+        switch (text[0]) {
+            case 'back':
+                this.ctx.deleteMessage()
+                await this.displayCreditDetailMenu(text[1])
+                break;
+        }
+    }
 
     async displayCreditPaymentMenu(contract_number) {
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_PAY_MENU)
@@ -330,17 +357,18 @@ class Bot {
         }
     }
 
-    async displayTransactionDetailMenu(transaction_id) {
+    async displayTransactionDetailMenu(guid) {
         await userStorage.changeStep(this.tg_user_id, steps.TRANSACTION_DETAIL)
+        let transactions = await httpClient.getTransactions(this.user.phone_number, this.user.access_token)
         let transaction
         try {
-            credits.result.data.bond_payments.forEach(res => {
-                if (res['transaction_id'] == transaction_id) {
+            transactions.result.data.bond_payments.forEach(res => {
+                if (res['guid'] == guid) {
                     transaction = res
                 }
             })
         }catch (e) {
-            this.ctx.return("Empty")
+            this.ctx.reply("Empty or Error")
             this.displayTransactionsMenu()
             return
         }
