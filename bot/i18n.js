@@ -120,8 +120,8 @@ let languages = {
         'ru': 'Долг текущего месяца'
     },
     'Month debt': {
-        'uz': ' qarzi',
-        'ru': 'Долг '
+        'uz': 'Qarz yoq',
+        'ru': 'Долгa нету '
     },
     "amount": {
         'uz': "summa",

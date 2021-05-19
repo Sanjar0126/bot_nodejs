@@ -32,6 +32,9 @@ const utils = {
             '<b>' + i18n('Payment status') + ':</b> ' + i18n(credit['status']) + '\n' +
             '<b>' + i18n('Credit amount left') + ':</b> ' + credit.repayment_schedule.repayment_schedule[0]['remaining_price'] + ' ' + i18n('sum') + '\n' +
             '<b>' + i18n('Paid price') + ':</b> ' + credit.repayment_schedule.repayment_schedule[0]['paid_price'] + ' ' + i18n('sum') + '\n'
+
+        let repayment_length = credit.repayment_schedule.repayment_schedule[0].repayment.length
+        let index = 1
         credit.repayment_schedule.repayment_schedule[0].repayment.forEach(element =>{
             let temp = element['date'].split("-")
             if(parseInt(temp[1]) == parseInt(this_month.getMonth())+1){
@@ -40,11 +43,17 @@ const utils = {
                     next_debt = 0
                 }
                 if(element['status']=='paid'){
-                    dept_text='<b>' + i18n(next_debt+'m') + ':</b> ' + credit.repayment_schedule.repayment_schedule[0]['current_month_debt'] + ' ' + i18n('sum') + '\n\n'
+                    if(index==repayment_length){
+                        dept_text='<b>' + i18n('Month debt') + '</b>\n\n'
+                    }
+                    else {
+                        dept_text = '<b>' + i18n(next_debt + 'm') + ':</b> ' + credit.repayment_schedule.repayment_schedule[0]['current_month_debt'] + ' ' + i18n('sum') + '\n\n'
+                    }
                 }
                 else{
                     dept_text='<b>' + i18n(this_month.getMonth()+'m') + ':</b> ' + credit.repayment_schedule.repayment_schedule[0]['current_month_debt'] + ' ' + i18n('sum') + '\n\n'
                 }
+                index++
             }
         })
 
