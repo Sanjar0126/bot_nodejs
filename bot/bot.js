@@ -6,6 +6,8 @@ const httpClient = require('./http_client')
 const {i18n, activateLanguage} = require('./i18n')
 var credits
 var transactions;
+var page_num;
+var trans_page_num;
 
 class Bot {
     constructor(ctx) {
@@ -105,7 +107,7 @@ class Bot {
         switch (text) {
             case 'credits':
                 await this.ctx.deleteMessage()
-                this.displayCreditsMenu()
+                this.displayCreditsMenu(1)
                 break
             case 'about':
                 await this.ctx.deleteMessage()
@@ -113,7 +115,7 @@ class Bot {
                 break
             case 'transactions':
                 await this.ctx.deleteMessage()
-                this.displayTransactionsMenu()
+                this.displayTransactionsMenu(1)
                 break
             case 'change_language':
                 await this.ctx.deleteMessage()
@@ -122,12 +124,13 @@ class Bot {
         }
     }
 
-    async displayCreditsMenu() {
+    async displayCreditsMenu(page) {
         await userStorage.changeStep(this.tg_user_id, steps.CREDITS)
-        
-        credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token)
+        page_num=page
+        credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token, page_num)
+
         this.ctx.reply(i18n("Credits"), 
-            await keyboards.creditsMenuKeyboard(i18n, credits))
+            await keyboards.creditsMenuKeyboard(i18n, credits, page_num))
     }
     async handleCreditsMenu(text) {
         switch (text) {
@@ -135,9 +138,15 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayMainMenu()
                 break
-            case 'menu_back':
+            case 'prev':
+                page_num--
                 await this.ctx.deleteMessage()
-                this.displayMainMenu()
+                this.displayCreditsMenu(page_num)
+                break
+            case 'next':
+                page_num++
+                await this.ctx.deleteMessage()
+                this.displayCreditsMenu(page_num)
                 break
             default:
                 await this.ctx.deleteMessage()
@@ -168,7 +177,7 @@ class Bot {
         switch (text[0]) {
             case 'back':
                 await this.ctx.deleteMessage()
-                this.displayCreditsMenu(text[1])
+                this.displayCreditsMenu(page_num)
                 break
             case 'menu_back':
                 await this.ctx.deleteMessage()
@@ -378,11 +387,12 @@ class Bot {
         }
     }
 
-    async displayTransactionsMenu() {
+    async displayTransactionsMenu(page) {
         await userStorage.changeStep(this.tg_user_id, steps.TRANSACTIONS)
-        transactions = await httpClient.getTransactions(this.user.phone_number, this.user.access_token)
+        trans_page_num=page
+        transactions = await httpClient.getTransactions(this.user.phone_number, this.user.access_token, trans_page_num)
         this.ctx.reply(i18n('Transactions'), 
-            await keyboards.transactionsMenuKeyboard(i18n, transactions))
+            await keyboards.transactionsMenuKeyboard(i18n, transactions, trans_page_num))
     }
     async handleTransactionsMenu(text) {
         switch (text) {
@@ -390,10 +400,16 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayMainMenu()
                 break
-            case 'menu_back':
+            case 'prev':
+                trans_page_num--
                 await this.ctx.deleteMessage()
-                this.displayMainMenu()
-                break
+                this.displayTransactionsMenu(trans_page_num)
+                break;
+            case 'next':
+                trans_page_num++
+                await this.ctx.deleteMessage()
+                this.displayTransactionsMenu(trans_page_num)
+                break;
             default:
                 await this.ctx.deleteMessage()
                 this.displayTransactionDetailMenu(text)

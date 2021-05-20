@@ -2,8 +2,8 @@ const axios = require('axios');
 const logger = require("../config/logger.js");
 const SMS_CODE = 'https://customer-user.api.iman.uz/v1/sms-code'
 const LOGIN_URL = 'https://customer-user.api.iman.uz/v1/login'
-const GET_INSTALLMENTS = 'https://customer-user.api.iman.uz/v1/customer/installments?phone_number='
-const GET_TRANSACTIONS = 'https://customer-user.api.iman.uz/v1/customer/transactions?phone_number='
+const GET_INSTALLMENTS = 'https://customer-user.api.iman.uz/v1/customer/installments'
+const GET_TRANSACTIONS = 'https://customer-user.api.iman.uz/v1/customer/transactions'
 
 const httpClient = {
 
@@ -43,12 +43,17 @@ const httpClient = {
         }
 
     },
-    async getCredits(phone, access_toke) {
+    async getCredits(phone, access_toke, page_num) {
         let phone_send = phone.replace('+', '')
         try {
-            let credits = await axios.get(GET_INSTALLMENTS + phone_send, {
+            let credits = await axios.get(GET_INSTALLMENTS, {
                 headers: {
                     Authorization: access_toke,
+                },
+                params: {
+                    phone_number: phone_send,
+                    page: page_num,
+                    limit: 10
                 }
             })
             return {
@@ -97,12 +102,17 @@ const httpClient = {
         
         return credit
     },
-    async getTransactions(phone, token) {
+    async getTransactions(phone, token, trans_page_num) {
         let phone_send = phone.replace('+', '')
         try {
-            let transactions = await axios.get(GET_TRANSACTIONS + phone_send, {
+            let transactions = await axios.get(GET_TRANSACTIONS, {
                 headers: {
                     Authorization: token,
+                },
+                params: {
+                    phone_number: phone_send,
+                    page: trans_page_num,
+                    limit: 10
                 }
             })
             return {

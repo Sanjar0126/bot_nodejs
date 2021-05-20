@@ -53,7 +53,7 @@ const keyboards = {
         })
     },
 
-    creditsMenuKeyboard: (i18n, credits) => {
+    creditsMenuKeyboard: (i18n, credits, page_num) => {
         return new Promise((resolve, reject) => {
             let arr = [];
             credits.result.data.installment_list.forEach(credit => {
@@ -63,9 +63,29 @@ const keyboards = {
                 ])
             })
 
-            arr.push([
-                Markup.button.callback(i18n('btn_back'), 'back')
-            ])
+            if(credits.result.data.count<=10){
+                arr.push([
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ])
+            }
+            else if(page_num==1) {
+                arr.push([
+                    Markup.button.callback('>>>', 'next'),
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ])
+            }
+            else if(page_num==Math.ceil(credits.result.data.count/10)){
+                arr.push([
+                    Markup.button.callback('<<<', 'prev'),
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ])
+            }else{
+                arr.push([
+                    Markup.button.callback('<<<', 'prev'),
+                    Markup.button.callback('>>>', 'next'),
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ])
+            }
 
             let keyboard = Markup.inlineKeyboard(arr)
             resolve(keyboard)
@@ -88,7 +108,7 @@ const keyboards = {
         })
     },
 
-    transactionsMenuKeyboard: (i18n, transactions) => {
+    transactionsMenuKeyboard: (i18n, transactions, page_num) => {
         return new Promise((resolve, reject) => {
             let arr = [];
             transactions.result.data.bond_payments.forEach(transaction => {
@@ -98,9 +118,29 @@ const keyboards = {
                 ])
             })
 
-            arr.push([
-                Markup.button.callback(i18n('btn_back'), 'back')
-            ])
+            if(transactions.result.data.count<=10){
+                arr.push([
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ])
+            }
+            else if(page_num==1) {
+                arr.push([
+                    Markup.button.callback('>>>', 'next'),
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ])
+            }
+            else if(page_num==Math.ceil(transactions.result.data.count/10)){
+                arr.push([
+                    Markup.button.callback('<<<', 'prev'),
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ])
+            }else{
+                arr.push([
+                    Markup.button.callback('<<<', 'prev'),
+                    Markup.button.callback('>>>', 'next'),
+                    Markup.button.callback(i18n('btn_back'), 'back')
+                ])
+            }
 
             let keyboard = Markup.inlineKeyboard(arr)
             resolve(keyboard)
