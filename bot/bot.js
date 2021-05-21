@@ -377,14 +377,25 @@ class Bot {
             await keyboards.cancelKeyboard(i18n))
     }
     async handle_add_card_num(text){
-        if(text.length==16) {
-            card_num = text
-            this.display_add_card_year()
+        switch (text) {
+            case 'cancel':
+                card_num = exp_month = exp_year = "";
+                await this.ctx.deleteMessage()
+                this.displayBankCardMenu(guid, customer_id)
+                break
+            default:
+                if(text.length==16 && Number.isInteger(parseInt(text))) {
+                    card_num = text
+                    this.display_add_card_year()
+                    break
+                }
+                else {
+                    this.ctx.reply(i18n("Error card number!"))
+                    this.add_card_num()
+                    break
+                }
         }
-        else{
-            this.ctx.reply(i18n("Error card number!"))
-            this.add_card_num()
-        }
+
     }
     async display_add_card_year(){
         await userStorage.changeStep(this.tg_user_id, steps.ENTER_CARD_EXPIRE_YEAR)
@@ -393,8 +404,17 @@ class Bot {
     }
 
     async add_card_year(text){
-        exp_year=text
-        this.display_add_card_month()
+        switch (text) {
+            case 'cancel':
+                card_num = exp_month = exp_year = "";
+                await this.ctx.deleteMessage()
+                this.displayBankCardMenu(guid, customer_id)
+                break
+            default:
+                exp_year=text
+                this.display_add_card_month()
+                break
+        }
     }
 
     async display_add_card_month(){
@@ -410,12 +430,12 @@ class Bot {
             let year = parseInt(exp_year)
             let add_card_req = await httpClient.add_card_request(customer_id, guid, num, month, year, this.user.access_token)
             if (add_card_req.status == 200) {
-                this.ctx.reply("SUCCES")
+                this.ctx.reply("SUCCESS")
             } else {
                 this.ctx.reply("FAIL")
             }
             card_num = exp_month = exp_year = "";
-            this.displayBankCardMenu(gugiid, customer_id)
+            this.displayBankCardMenu(guid, customer_id)
         }
         else{
             this.ctx.reply(i18n("Error month!"))
