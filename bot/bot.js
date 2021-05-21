@@ -105,8 +105,9 @@ class Bot {
     async displayMainMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.MAIN)
 
-        this.ctx.reply(i18n("Main menu"), 
-            await keyboards.mainMenuKeyboard(i18n))
+        this.ctx.reply(i18n("Main menu"),
+            await keyboards.mainMenuKeyboard(i18n),
+            await keyboards.removeKeyboard)
     }
     async handleMainMenu(text) {
         switch (text) {
