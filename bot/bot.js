@@ -8,6 +8,11 @@ var credits
 var transactions;
 var page_num;
 var trans_page_num;
+var customer_id;
+var card_num
+var exp_month
+var exp_year
+var guid
 
 class Bot {
     constructor(ctx) {
@@ -121,6 +126,11 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displaySelectLanguageMenu()
                 break
+            case 'logout':
+                await userStorage.update(this.tg_user_id, {is_active: false});
+                await this.ctx.deleteMessage()
+                this.displaySelectLanguageMenu()
+                break
         }
     }
 
@@ -151,16 +161,17 @@ class Bot {
             default:
                 await this.ctx.deleteMessage()
                 this.displayCreditDetailMenu(text)
+                break
         }
     }
 
-    async displayCreditDetailMenu(contract_number) {
+    async displayCreditDetailMenu(id) {
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_DETAIL)
         // let credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token)
         let credit
         try {
             credits.result.data.installment_list.forEach(res => {
-                if (res['contract_number'] == contract_number) {
+                if (res['guid'] == id) {
                     credit = res
                 }
             })
@@ -168,13 +179,14 @@ class Bot {
             this.displayCreditsMenu()
             return
         }
+        guid = id
+        customer_id = credit.customer['guid']
         let text = utils.getCreditDetailText(i18n, credit)
         this.ctx.replyWithHTML(text, 
-            await keyboards.creditDetailMenuKeyboard(i18n, contract_number))
+            await keyboards.creditDetailMenuKeyboard(i18n))
     }
     async handleCreditDetailMenu(res) {
-        let text = res.split('/', 2)
-        switch (text[0]) {
+        switch (res) {
             case 'back':
                 await this.ctx.deleteMessage()
                 this.displayCreditsMenu(page_num)
@@ -185,21 +197,21 @@ class Bot {
                 break
             case 'pay':
                 await this.ctx.deleteMessage()
-                this.displayCreditPaymentMenu(text[1])
+                this.displayCreditPaymentMenu(guid, customer_id)
                 break
             case 'credit_payment_schedule':
                 await this.ctx.deleteMessage()
-                this.displayCreditGraph(text[1])
+                this.displayCreditGraph(guid)
                 break
         }
     }
 
-    async displayCreditGraph(contract_number){
+    async displayCreditGraph(guid){
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_GRAPH)
         let credit
         try {
             credits.result.data.installment_list.forEach(res => {
-                if (res['contract_number'] == contract_number) {
+                if (res['guid'] == guid) {
                     credit = res
                 }
             })
@@ -210,15 +222,14 @@ class Bot {
         }
         let text = utils.getCreditGraph(i18n, credit)
         this.ctx.replyWithHTML(text,
-            await keyboards.graphMenuKeyboard(i18n, contract_number))
+            await keyboards.graphMenuKeyboard(i18n))
     }
 
     async handleCreditGraph(res){
-        let text = res.split('/', 2)
-        switch (text[0]) {
+        switch (res) {
             case 'back':
                 this.ctx.deleteMessage()
-                await this.displayCreditDetailMenu(text[1])
+                await this.displayCreditDetailMenu(guid)
                 break;
             case 'menu_back':
                 await this.ctx.deleteMessage()
@@ -227,37 +238,178 @@ class Bot {
         }
     }
 
-    async displayCreditPaymentMenu(contract_number) {
+    async displayCreditPaymentMenu(guid, customer_id) {
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_PAY_MENU)
         this.ctx.reply(i18n('pay'),
-            await keyboards.payMenuKeyboard(i18n, contract_number))
+            await keyboards.payMenuKeyboard(i18n))
     }
     async handleCreditPaymentMenu(res) {
-        let text = res.split('/', 2)
-        switch (text[0]){
+        switch (res){
             case 'card_list':
                 this.ctx.deleteMessage()
-                await this.ctx.reply("hello world")
-                await this.displayBankCardMenu(text[1])
+                await this.displayBankCardMenu(guid, customer_id)
                 break
             case 'paynet':
                 this.ctx.deleteMessage()
                 await this.ctx.reply("Инфо о способе оплаты через пайнет:\nF U")
-                await this.displayCreditPaymentMenu(text[1])
+                await this.displayCreditPaymentMenu(guid)
                 break
             case 'back':
                 this.ctx.deleteMessage()
-                await this.displayCreditDetailMenu(text[1])
+                await this.displayCreditDetailMenu(guid)
                 break
-            case 'menu_back':
+            case 'cancel':
                 await this.ctx.deleteMessage()
-                this.displayMainMenu()
+                let cancel_request = await httpClient.CancelPayment(guid, this.user.access_token)
+                if(cancel_request.status==200){
+                    console.log("success")
+                    await this.ctx.reply("Success")
+                }else{
+                    console.log("bad")
+                    await this.ctx.reply("bad request")
+                }
+                this.displayCreditPaymentMenu(guid)
                 break
         }
     }
 
-    async displayBankCardMenu(){
+    async displayBankCardMenu(guid, customer_id){
+        await userStorage.changeStep(this.tg_user_id, steps.CARDS_LIST)
+        let card_list = await httpClient.get_card_list(guid, this.user.access_token)
+        if(card_list.status!=200){
+            console.log("ERROR SENDING CARD LIST REQUEST")
+            await this.ctx.deleteMessage()
+            await this.ctx.reply('error occured')
+            await this.displayCreditPaymentMenu(guid)
+        }
+        else {
+            this.ctx.reply(i18n('Card List'),
+                await keyboards.cardListKeyboard(i18n, card_list))
+        }
+    }
+    async handleBankCardMenu(res){
+        switch (res) {
+            case 'back': {
+                await this.ctx.deleteMessage()
+                this.displayCreditPaymentMenu(guid, customer_id)
+                break
+            }
+            case 'add_card':
+                await this.ctx.deleteMessage()
+                this.add_card_num(guid, customer_id)
+                break;
+            default:
+                await this.ctx.deleteMessage()
+                this.displayRegisterSubscription(guid, customer_id)
+                break;
+        }
+    }
 
+    async displayRegisterSubscription(guid, customer_id){
+        await userStorage.changeStep(this.tg_user_id, steps.SUBSCRIBE_PAY)
+        this.ctx.reply(i18n('WANNA AUTO PAY'),
+            await keyboards.is_subscribed_choose(i18n))
+    }
+
+    async handle_subscribe_choice(text){
+        switch (text) {
+            case 'back':
+                await this.ctx.deleteMessage()
+                this.displayBankCardMenu(guid, customer_id)
+                break
+            case 'auto':
+                await this.ctx.deleteMessage()
+                let sub_req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, true)
+                if(sub_req.status==200){
+                    this.ctx.reply('success')
+                    this.display_confirm_subs(guid, customer_id)
+                }
+                else{
+                    this.ctx.reply('error send request')
+                    this.displayBankCardMenu(guid, customer_id)
+                }
+                break
+            case 'manual':
+                await this.ctx.deleteMessage()
+                let req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, false)
+                if(req.status==200){
+                    this.ctx.reply('success')
+                    this.display_confirm_subs(guid, customer_id)
+                }
+                else{
+                    this.ctx.reply('error send request')
+                    this.displayBankCardMenu(guid, customer_id)
+                }
+                break
+        }
+    }
+
+    async display_confirm_subs(guid, customer_id){
+        await userStorage.changeStep(this.tg_user_id, steps.SUBSCRIBE_CONFIRM)
+        this.ctx.reply(i18n("Enter sms code"),
+            await keyboards.smscofirmkeyboard(i18n))
+    }
+
+    async handle_confirm_subs(text){
+        switch (text) {
+            case 'back':
+                await this.ctx.deleteMessage()
+                this.displayCreditDetailMenu(guid)
+                break
+            default:
+                let sub_request = await httpClient.send_sub_sms(text, guid, this.user.access_token)
+                if(sub_request.status==200){
+                    this.ctx.reply("success")
+                    this.displayCreditDetailMenu(guid)
+                    break
+                }
+                else{
+                    this.ctx.reply("failed")
+                    this.displayCreditDetailMenu(guid)
+                    break
+                }
+        }
+    }
+
+    async add_card_num(guid, customer_id){
+        await userStorage.changeStep(this.tg_user_id, steps.ENTER_CARD_NUMBER)
+        this.ctx.reply(i18n('Enter card number'),
+            await keyboards.cancelKeyboard(i18n))
+    }
+    async handle_add_card_num(text){
+        card_num=text
+        this.display_add_card_year()
+    }
+    async display_add_card_year(){
+        await userStorage.changeStep(this.tg_user_id, steps.ENTER_CARD_EXPIRE_YEAR)
+        this.ctx.reply(i18n('Enter card expire year'),
+            await keyboards.cancelKeyboard(i18n))
+    }
+
+    async add_card_year(text){
+        exp_year=text
+        this.display_add_card_month()
+    }
+
+    async display_add_card_month(){
+        await userStorage.changeStep(this.tg_user_id, steps.ENTER_CARD_EXPIRE_MONTH)
+        this.ctx.reply(i18n('Enter card expire month'),
+            await keyboards.cancelKeyboard(i18n))
+    }
+    async add_card_month(txt){
+        exp_month=txt
+        let num = card_num
+        let month = parseInt(exp_month)
+        let year = parseInt(exp_year)
+        let add_card_req = await httpClient.add_card_request(customer_id, guid, num, month, year, this.user.access_token)
+        if (add_card_req.status == 200){
+            this.ctx.reply("SUCCES")
+        }
+        else{
+            this.ctx.reply("FAIL")
+        }
+        card_num=exp_month=exp_year = "";
+        this.displayBankCardMenu(guid, customer_id)
     }
 
     async displayCreditPaymentScheduleMenu() {
@@ -268,6 +420,7 @@ class Bot {
         this.ctx.reply(text, 
             await keyboards.backKeyboard(i18n))
     }
+
     async handleCreditPaymentScheduleMenu(text) {
         switch (text) {
             case 'back':

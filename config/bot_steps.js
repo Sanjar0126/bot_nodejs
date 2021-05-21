@@ -20,7 +20,11 @@ const botSteps = {
     SELECT_PAYMENT_TYPE: "select_payment_type",
     CARDS_LIST: "cards_list",
     ENTER_CARD_NUMBER: "enter_card_number",
-    ENTER_CARD_EXPIRE_DATE: "enter_card_expire_date",
+    ENTER_CARD_EXPIRE_MONTH: "enter_card_expire_month",
+    ENTER_CARD_EXPIRE_YEAR: "enter_card_expire_year",
+    SUBSCRIBE_PAY: "SUBSCRIBE_PAY",
+    SUBSCRIBE_CONFIRM: "SUBSCRIBE_CONFIRM",
+
     CONFIRM_CARD: "confirm_card",
 
     TRANSACTIONS: "transactions",

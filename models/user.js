@@ -45,8 +45,11 @@ const UserSchema = new mongoose.Schema({
             steps.SELECT_PAYMENT_TYPE,
             steps.CARDS_LIST,
             steps.ENTER_CARD_NUMBER,
-            steps.ENTER_CARD_NUMBER,
+            steps.ENTER_CARD_EXPIRE_MONTH,
+            steps.ENTER_CARD_EXPIRE_YEAR,
             steps.CONFIRM_CARD,
+            steps.SUBSCRIBE_PAY,
+            steps.SUBSCRIBE_CONFIRM,
 
             steps.TRANSACTIONS,
             steps.TRANSACTION_DETAIL,

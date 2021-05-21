@@ -34,6 +34,18 @@ const handlers = {
                 case steps.CONFIRM_LOGIN:
                     bot.handleConfirmLoginMenu(text)
                     break;
+                case steps.ENTER_CARD_NUMBER:
+                    bot.handle_add_card_num(text)
+                    break
+                case steps.ENTER_CARD_EXPIRE_YEAR:
+                    bot.add_card_year(text)
+                    break
+                case steps.ENTER_CARD_EXPIRE_MONTH:
+                    bot.add_card_month(text)
+                    break
+                case steps.SUBSCRIBE_CONFIRM:
+                    bot.handle_confirm_subs(text)
+                    break
             }
         } catch(e) {
             logger.error("Error while handling text message: " + e)
@@ -111,6 +123,18 @@ const handlers = {
                     break
                 case steps.CREDIT_GRAPH:
                     bot.handleCreditGraph(text)
+                    break
+                case steps.CARDS_LIST:
+                    bot.handleBankCardMenu(text)
+                    break
+                case steps.ENTER_CARD_NUMBER:
+                    bot.handle_add_card_num(text)
+                    break
+                case steps.SUBSCRIBE_PAY:
+                    bot.handle_subscribe_choice(text)
+                    break
+                case steps.SUBSCRIBE_CONFIRM:
+                    bot.handle_confirm_subs(text)
                     break
             }
         } catch(e) {

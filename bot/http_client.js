@@ -1,9 +1,12 @@
 const axios = require('axios');
 const logger = require("../config/logger.js");
-const SMS_CODE = 'https://customer-user.api.iman.uz/v1/sms-code'
-const LOGIN_URL = 'https://customer-user.api.iman.uz/v1/login'
-const GET_INSTALLMENTS = 'https://customer-user.api.iman.uz/v1/customer/installments'
-const GET_TRANSACTIONS = 'https://customer-user.api.iman.uz/v1/customer/transactions'
+const config = require("../config/index");
+const SMS_CODE = config.SERVER_URL + '/v1/sms-code'
+const LOGIN_URL = config.SERVER_URL + '/v1/login'
+const GET_INSTALLMENTS = config.SERVER_URL + '/v1/customer/installments'
+const GET_TRANSACTIONS = config.SERVER_URL + '/v1/customer/transactions'
+const POST_CANCEL_PAYMENT = config.SERVER_URL + '/v1/customer/cancel-payment/'
+const GET_CARD_LIST = config.SERVER_URL + "/v1/customer/get-cards/"
 
 const httpClient = {
 
@@ -42,6 +45,77 @@ const httpClient = {
             }
         }
 
+    },
+    async send_sub_sms(cod, id, token){
+        return await axios.post(config.SERVER_URL+'/v1/customer-subscription-otp',{
+            code: cod,
+            guid: id
+        },
+            {
+                headers:{
+                    Authorization: token
+                },
+            })
+    },
+    async register_subscribe(customer_id, guid, token, status){
+        return await axios.post(config.SERVER_URL+'/v1/customers/'+customer_id+'/installments/'+guid+'/registry-subscription',
+            {
+                is_subscribed: status
+            },
+            {
+                headers:{
+                    Authorization: token
+                },
+                params:{
+                    id: customer_id,
+                    guid: guid
+                }
+            })
+    },
+    async add_card_request(customer_id, guid, card_num, exp_mon, exp_year, token){
+        return await axios.post(config.SERVER_URL+'/v1/customers/'+customer_id+'/installments/'+guid+'/card',{
+            card_expiry_month: exp_mon,
+            card_expiry_year: exp_year,
+            card_number: card_num
+        }, {
+            headers:{
+                Authorization: token
+            },
+            params:{
+                id: customer_id,
+                guid: guid
+            }
+        })
+    },
+    async get_card_list(guid, access_token){
+        try
+        {
+            return await axios.get(GET_CARD_LIST + guid, {
+                headers: {
+                    Authorization: access_token
+                }
+            })
+        }catch (e){
+            return {
+                respose: 500
+            }
+        }
+
+    },
+    async CancelPayment(guid, access_token){
+        try {
+            return await axios.post(POST_CANCEL_PAYMENT, {
+                bond_uuid: guid,
+            }, {
+                headers: {
+                    Authorization: access_token
+                }
+            });
+        }catch (e) {
+            return {
+                response: "ERROR SENDING REQUEST"
+            }
+        }
     },
     async getCredits(phone, access_toke, page_num) {
         let phone_send = phone.replace('+', '')

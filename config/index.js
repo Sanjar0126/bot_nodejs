@@ -6,6 +6,7 @@ const config = {
     MONGO_PASSWORD: getConf("MONGO_PASSWORD", "iman"),
     MONGO_DATABASE: getConf("MONGO_DATABASE", "iman_client_bot_db"),
     BOT_TOKEN: "1774588977:AAGv60xqpghyhh-k89_D-ptioEkgrDE6wzQ",
+    SERVER_URL: 'https://customer-user.api.iman.uz',
 };
 
 function getConf(name, def = "") {

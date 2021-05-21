@@ -268,6 +268,10 @@ let languages = {
         'uz': '💳 Karta ro‘yxati',
         'ru': '💳 Список карт'
     },
+    'add_card': {
+        'uz': "Yangi karta qo'shish",
+        'ru': 'Добавить новую карту'
+    },
     'card': {
         'uz': '💳 Karta',
         'ru': '💳 По карте'
@@ -277,57 +281,65 @@ let languages = {
         'ru': 'Успешно'
     },
     '0m': {
-        'uz': 'Yanvar qarzi',
+        'uz': 'Yanvar oyi qarzi',
         'ru': 'Долг Января'
     },
     '1m': {
-        'uz': 'Fevral qarzi',
+        'uz': 'Fevral oyi qarzi',
         'ru': 'Долг Февраля'
     },
     '2m': {
-        'uz': 'Mart qarzi',
+        'uz': 'Mart oyi qarzi',
         'ru': 'Долг Марта'
     },
     '3m': {
-        'uz': 'Aprel qarzi',
+        'uz': 'Aprel oyi qarzi',
         'ru': 'Долг Апреля'
     },
     '4m': {
-        'uz': 'May qarzi',
+        'uz': 'May oyi qarzi',
         'ru': 'Долг Мая'
     },
     '5m': {
-        'uz': 'Iyun qarzi',
+        'uz': 'Iyun oyi qarzi',
         'ru': 'Долг Июня'
     },
     '6m': {
-        'uz': 'Iyul qarzi',
+        'uz': 'Iyul oyi qarzi',
         'ru': 'Долг Июля'
     },
     '7m': {
-        'uz': 'Avgust qarzi',
+        'uz': 'Avgust oyi qarzi',
         'ru': 'Долг Августа'
     },
     '8m': {
-        'uz': 'Sentabr qarzi',
+        'uz': 'Sentabr oyi qarzi',
         'ru': 'Долг Сентября'
     },
     '9m': {
-        'uz': 'Oktabr qarzi',
+        'uz': 'Oktabr oyi qarzi',
         'ru': 'Долг Октября'
     },
     '10m': {
-        'uz': 'Noyabr qarzi',
+        'uz': 'Noyabr oyi qarzi',
         'ru': 'Долг Ноября'
     },
     '11m': {
-        'uz': 'Dekabr qarzi',
+        'uz': 'Dekabr oyi qarzi',
         'ru': 'Долг Декабря'
     },
     'menu_back': {
         'uz': 'Asosiy menuga qaytish',
         'ru': 'Вернутся в главную меню'
-    }
+    },
+    'Cancel payment': {
+        'uz': "To'lovni bekor qilish",
+        'ru': 'Отменить оплату'
+    },
+    'Enter card number': {
+        'uz': 'Karta raqamini kiriting:',
+        'ru': 'Введите номер карты:'
+    },
 }
 
 let language = 'ru'
