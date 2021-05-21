@@ -46,6 +46,9 @@ const handlers = {
                 case steps.SUBSCRIBE_CONFIRM:
                     bot.handle_confirm_subs(text)
                     break
+                case steps.ABOUT:
+                    bot.handleAboutMenu(text)
+                    break
             }
         } catch(e) {
             logger.error("Error while handling text message: " + e)

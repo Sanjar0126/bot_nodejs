@@ -141,7 +141,8 @@ class Bot {
         credits = await httpClient.getCredits(this.user.phone_number, this.user.access_token, page_num)
 
         this.ctx.reply(i18n("Credits"), 
-            await keyboards.creditsMenuKeyboard(i18n, credits, page_num))
+            await keyboards.creditsMenuKeyboard(i18n, credits, page_num),
+            await keyboards.backtoMenu(i18n))
     }
     async handleCreditsMenu(text) {
         switch (text) {
@@ -184,7 +185,8 @@ class Bot {
         customer_id = credit.customer['guid']
         let text = utils.getCreditDetailText(i18n, credit)
         this.ctx.replyWithHTML(text, 
-            await keyboards.creditDetailMenuKeyboard(i18n))
+            await keyboards.creditDetailMenuKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
     async handleCreditDetailMenu(res) {
         switch (res) {
@@ -223,7 +225,8 @@ class Bot {
         }
         let text = utils.getCreditGraph(i18n, credit)
         this.ctx.replyWithHTML(text,
-            await keyboards.graphMenuKeyboard(i18n))
+            await keyboards.graphMenuKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
 
     async handleCreditGraph(res){
@@ -242,7 +245,8 @@ class Bot {
     async displayCreditPaymentMenu(guid, customer_id) {
         await userStorage.changeStep(this.tg_user_id, steps.CREDIT_PAY_MENU)
         this.ctx.reply(i18n('pay'),
-            await keyboards.payMenuKeyboard(i18n))
+            await keyboards.payMenuKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
     async handleCreditPaymentMenu(res) {
         switch (res){
@@ -285,7 +289,8 @@ class Bot {
         }
         else {
             this.ctx.reply(i18n('Card List'),
-                await keyboards.cardListKeyboard(i18n, card_list))
+                await keyboards.cardListKeyboard(i18n, card_list),
+                await keyboards.backtoMenu(i18n))
         }
     }
     async handleBankCardMenu(res){
@@ -309,7 +314,8 @@ class Bot {
     async displayRegisterSubscription(guid, customer_id){
         await userStorage.changeStep(this.tg_user_id, steps.SUBSCRIBE_PAY)
         this.ctx.reply(i18n('WANNA AUTO PAY'),
-            await keyboards.is_subscribed_choose(i18n))
+            await keyboards.is_subscribed_choose(i18n),
+            await keyboards.backtoMenu(i18n))
     }
 
     async handle_subscribe_choice(text){
@@ -348,7 +354,8 @@ class Bot {
     async display_confirm_subs(guid, customer_id){
         await userStorage.changeStep(this.tg_user_id, steps.SUBSCRIBE_CONFIRM)
         this.ctx.reply(i18n("Enter sms code"),
-            await keyboards.smscofirmkeyboard(i18n))
+            await keyboards.smscofirmkeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
 
     async handle_confirm_subs(text){
@@ -375,7 +382,8 @@ class Bot {
     async add_card_num(){
         await userStorage.changeStep(this.tg_user_id, steps.ENTER_CARD_NUMBER)
         this.ctx.reply(i18n('Enter card number'),
-            await keyboards.cancelKeyboard(i18n))
+            await keyboards.cancelKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
     async handle_add_card_num(text){
         switch (text) {
@@ -401,7 +409,8 @@ class Bot {
     async display_add_card_year(){
         await userStorage.changeStep(this.tg_user_id, steps.ENTER_CARD_EXPIRE_YEAR)
         this.ctx.reply(i18n('Enter card expire year'),
-            await keyboards.cancelKeyboard(i18n))
+            await keyboards.cancelKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
 
     async add_card_year(text){
@@ -421,7 +430,8 @@ class Bot {
     async display_add_card_month(){
         await userStorage.changeStep(this.tg_user_id, steps.ENTER_CARD_EXPIRE_MONTH)
         this.ctx.reply(i18n('Enter card expire month'),
-            await keyboards.cancelKeyboard(i18n))
+            await keyboards.cancelKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
     async add_card_month(txt){
         if(parseInt(txt)>0 && parseInt(txt)<=12) {
@@ -470,7 +480,8 @@ class Bot {
         await userStorage.changeStep(this.tg_user_id, steps.ABOUT)
 
         this.ctx.reply(i18n("About Iman"),
-            await keyboards.aboutMenuKeyboard(i18n))
+            await keyboards.aboutMenuKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
     async handleAboutMenu(text) {
         switch (text) {
@@ -503,7 +514,8 @@ class Bot {
     async displayMissionMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.ABOUT_MISSION)
         this.ctx.reply(i18n('Mission content'),
-            await keyboards.backKeyboard(i18n))
+            await keyboards.backKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
     async handleMissionMenu(text){
         switch (text) {
@@ -521,7 +533,7 @@ class Bot {
     async displayIslamMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.ISLAM_FINANCE)
         this.ctx.reply(i18n('Islam content'),
-            await keyboards.backKeyboard(i18n))
+            await keyboards.backKeyboard(i18n),await keyboards.backtoMenu(i18n))
     }
     async handleIslamMenu(text){
         switch (text) {
@@ -539,7 +551,8 @@ class Bot {
     async displayMusavamaMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.ABOUT_MUSAVAMA)
         this.ctx.reply(i18n('Musavama content'),
-            await keyboards.backKeyboard(i18n))
+            await keyboards.backKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
     async handleMusavamaMenu(text){
         switch (text) {
@@ -557,7 +570,7 @@ class Bot {
     async displayMudarabaMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.ABOUT_MUDARABA)
         this.ctx.reply(i18n('Mudaraba content'),
-            await keyboards.backKeyboard(i18n))
+            await keyboards.backKeyboard(i18n),await keyboards.backtoMenu(i18n))
     }
     async handleMudarabaMenu(text){
         switch (text) {
@@ -577,7 +590,8 @@ class Bot {
         trans_page_num=page
         transactions = await httpClient.getTransactions(this.user.phone_number, this.user.access_token, trans_page_num)
         this.ctx.reply(i18n('Transactions'), 
-            await keyboards.transactionsMenuKeyboard(i18n, transactions, trans_page_num))
+            await keyboards.transactionsMenuKeyboard(i18n, transactions, trans_page_num),
+            await keyboards.backtoMenu(i18n))
     }
     async handleTransactionsMenu(text) {
         switch (text) {
@@ -619,7 +633,8 @@ class Bot {
         }
         let text = utils.getTransactionDetail(i18n, transaction)
         await this.ctx.replyWithHTML(text,
-            await keyboards.backKeyboard(i18n))
+            await keyboards.backKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
     }
     async handleTransactionDetailMenu(text) {
         switch (text) {

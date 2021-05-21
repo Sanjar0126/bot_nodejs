@@ -20,6 +20,15 @@ const keyboards = {
             resolve(keyboard)
         }) 
     },
+    backtoMenu: (i18n) => {
+        return new Promise((resolve, reject) => {
+            let keyboard = Markup.keyboard([
+                Markup.button.callback(i18n('btn_back'), 'back'),
+                Markup.button.callback(i18n('menu_back'), 'menu_back')
+            ])
+            resolve(keyboard)
+        })
+    },
 
     selectLanguageMenuKeyboard: Markup.inlineKeyboard([
         [
