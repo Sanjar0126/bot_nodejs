@@ -135,8 +135,6 @@ const keyboards = {
     cardListKeyboard: (i18n, card_list) => {
         return new Promise((resolve, reject) => {
             let arr = []
-            let asd = [1, 1, 2, 3, 4, 4, 1]
-            console.log(_.uniq(asd, false))
             _.uniq(card_list.data.bond_cards, false).forEach(card => {
                 if(card['card_number'] != '') {
                     let txt = i18n('Card Code') + ' - ' + card['card_number']
