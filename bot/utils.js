@@ -83,7 +83,7 @@ const utils = {
             '<b>'+ i18n('trans_status') +':</b> ' + i18n(trans['status']) + '\n' +
             '<b>'+ i18n('repayment_schedule_date') +':</b> ' + schedule_date + '\n' +
             '<b>'+ i18n('Payment type') +':</b> ' + i18n(trans['payment_type']) + '\n'
-        if(trans['update_at'] == undefined){
+        if(trans['update_at'] != undefined){
             text=text+'<b>'+ i18n('update_at') +':</b> ' + trans['update_at'] + '\n'
         }
             return text
