@@ -392,6 +392,10 @@ let languages = {
         'uz': 'Karta raqamini kiriting:',
         'ru': 'Введите номер карты:'
     },
+    'repayment_schedule_date': {
+        'uz': "To'lov sa'nasi",
+        'ru': 'Дата оплаты'
+    }
 }
 
 let language = 'ru'
