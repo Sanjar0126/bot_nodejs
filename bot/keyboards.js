@@ -97,28 +97,26 @@ const keyboards = {
             })
 
             if(credits.result.data.count<=10){
-                arr.push([
-                    Markup.button.callback(i18n('btn_back'), 'back')
-                ])
+                
             }
             else if(page_num==1) {
                 arr.push([
                     Markup.button.callback('>>>', 'next'),
-                    Markup.button.callback(i18n('btn_back'), 'back')
                 ])
             }
             else if(page_num==Math.ceil(credits.result.data.count/10)){
                 arr.push([
                     Markup.button.callback('<<<', 'prev'),
-                    Markup.button.callback(i18n('btn_back'), 'back')
                 ])
             }else{
                 arr.push([
                     Markup.button.callback('<<<', 'prev'),
                     Markup.button.callback('>>>', 'next'),
-                    Markup.button.callback(i18n('btn_back'), 'back')
                 ])
             }
+            arr.push([
+                Markup.button.callback(i18n('btn_back'), 'back')
+            ])
 
             let keyboard = Markup.inlineKeyboard(arr)
             resolve(keyboard)
@@ -172,28 +170,26 @@ const keyboards = {
             })
 
             if(transactions.result.data.count<=10){
-                arr.push([
-                    Markup.button.callback(i18n('btn_back'), 'back')
-                ])
+                
             }
             else if(page_num==1) {
                 arr.push([
                     Markup.button.callback('>>>', 'next'),
-                    Markup.button.callback(i18n('btn_back'), 'back')
                 ])
             }
             else if(page_num==Math.ceil(transactions.result.data.count/10)){
                 arr.push([
                     Markup.button.callback('<<<', 'prev'),
-                    Markup.button.callback(i18n('btn_back'), 'back')
                 ])
             }else{
                 arr.push([
                     Markup.button.callback('<<<', 'prev'),
                     Markup.button.callback('>>>', 'next'),
-                    Markup.button.callback(i18n('btn_back'), 'back')
                 ])
             }
+            arr.push([
+                Markup.button.callback(i18n('btn_back'), 'back')
+            ])
 
             let keyboard = Markup.inlineKeyboard(arr)
             resolve(keyboard)
