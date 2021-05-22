@@ -41,6 +41,7 @@ const keyboards = {
             let keyboard = Markup.keyboard([
                 [
                     Markup.button.callback(i18n('btn_back'), 'back'),
+                    Markup.button.contactRequest(i18n('btn_send_contact'))
                 ]
             ]).resize(true).oneTime(true)
             resolve(keyboard)
