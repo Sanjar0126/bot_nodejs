@@ -70,8 +70,8 @@ class Bot {
                 }
                 let res
                 res = await httpClient.check_phone(text)
-                console.log('response'+res.status_code)
-                if (res.status_code==200 ) {
+                console.log('response'+res.status)
+                if (res.status==200 ) {
                     await userStorage.update(this.tg_user_id, {'phone_number': text})
                     this.user.phone_number = text
                     this.displayConfirmLoginMenu()
