@@ -75,7 +75,7 @@ const utils = {
     getTransactionDetail(i18n, trans) {
         schedule_date = trans['repayment_schedule_date'].split('T', 1)
         date = trans['created_at'].split('.', 1)
-        created_date = date.split('T', 2)
+        created_date = date[0].split('T', 2)
         let text = i18n('Transaction detail') + '\n\n' +
             '<b>' + i18n('Contract number') + ':</b> ' + trans['bond_id'] + '\n' +
             '<b>'+ i18n('Transaction date') +':</b> ' + created_date[0] + ' '+ created_date[1] + '\n' +
