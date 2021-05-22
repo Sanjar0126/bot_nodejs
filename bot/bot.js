@@ -618,7 +618,7 @@ class Bot {
 
     async displayTransactionDetailMenu(guid) {
         await userStorage.changeStep(this.tg_user_id, steps.TRANSACTION_DETAIL)
-        let transactions = await httpClient.getTransactions(this.user.phone_number, this.user.access_token)
+        let transactions = await httpClient.getTransactions(this.user.phone_number, this.user.access_token, trans_page_num)
         let transaction
         try {
             transactions.result.data.bond_payments.forEach(res => {
