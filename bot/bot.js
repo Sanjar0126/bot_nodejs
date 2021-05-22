@@ -631,6 +631,7 @@ class Bot {
             this.displayTransactionsMenu()
             return
         }
+        console.log(transaction['bond_id'])
         let text = utils.getTransactionDetail(i18n, transaction)
         await this.ctx.replyWithHTML(text,
             await keyboards.backKeyboard(i18n),
