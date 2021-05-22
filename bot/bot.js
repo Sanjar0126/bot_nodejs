@@ -641,7 +641,7 @@ class Bot {
         switch (text) {
             case 'back':
                 await this.ctx.deleteMessage()
-                this.displayTransactionsMenu()
+                this.displayTransactionsMenu(trans_page_num)
                 break
             case 'menu_back':
                 await this.ctx.deleteMessage()
