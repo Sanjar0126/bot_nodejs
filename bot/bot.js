@@ -65,6 +65,7 @@ class Bot {
                 if(!utils.validatePhoneNumber(text)){
                     await this.ctx.reply(i18n("Incorrect phone format"))
                     this.displayLoginMenu()
+                    return
                 }
                 let res
                 res = await httpClient.check_phone(text)
