@@ -400,6 +400,10 @@ let languages = {
     'repayment_schedule_date': {
         'uz': "To'lov sa'nasi",
         'ru': 'Дата оплаты'
+    },
+    'logout': {
+        'uz': 'Accountdan chiqish',
+        'ru': 'Выйти из аккаунта'
     }
 }
 
