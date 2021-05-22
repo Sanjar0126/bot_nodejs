@@ -305,8 +305,12 @@ let languages = {
         'ru': '🕋 Мудараба ру'
     },
     'Incorrect phone number':{
-        'uz': 'Kiritilgan telefon formati xato yoki ro‘yxatdan o‘tilmagan.\nIltimos qayta urinib ko‘ring.',
-        'ru': 'Формат набранного номера неправильные или номер не зарегистрирован.\nПожалуйста попробуйте снова.'
+        'uz': 'Kiritilgan telefon formati xato.\nIltimos qayta urinib ko‘ring.',
+        'ru': 'Формат набранного номера неправильный.\nПожалуйста попробуйте снова.'
+    }, 
+    'Incorrect phone format':{
+        'uz': 'Kiritilgan telefon ro‘yxatdan o‘tilmagan.\nIltimos qayta urinib ko‘ring.',
+        'ru': 'Hомер не зарегистрирован.\nПожалуйста попробуйте снова.'
     },
     'Incorrect code':{
         'uz': 'Kiritilgan kod xato.\nIltimos qayta tekshirib urinib ko‘ring.',
@@ -384,9 +388,10 @@ let languages = {
         'uz': 'Asosiy menuga qaytish',
         'ru': 'Вернутся в главную меню'
     },
+
     'Cancel payment': {
-        'uz': "To'lovni bekor qilish",
-        'ru': 'Отменить оплату'
+        'uz': "Avto to'lovni bekor qilish",
+        'ru': 'Отменить авто погашение'
     },
     'Enter card number': {
         'uz': 'Karta raqamini kiriting:',

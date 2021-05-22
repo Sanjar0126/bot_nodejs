@@ -62,9 +62,13 @@ class Bot {
                 if (!text.startsWith("+", 0)) {
                     text = '+' + text
                 }
+                if(!utils.validatePhoneNumber(text)){
+                    await this.ctx.reply(i18n("Incorrect phone format"))
+                    this.displayLoginMenu()
+                }
                 let res
                 res = await httpClient.check_phone(text)
-                if (res.status_code==200 && utils.validatePhoneNumber(text)) {
+                if (res.status_code==200 ) {
                     await userStorage.update(this.tg_user_id, {'phone_number': text})
                     this.user.phone_number = text
                     this.displayConfirmLoginMenu()
