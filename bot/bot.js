@@ -63,7 +63,8 @@ class Bot {
                     text = '+' + text
                 }
                 if(!utils.validatePhoneNumber(text)){
-                    await this.ctx.reply(i18n("Incorrect phone format"))
+                    console.log('phone error')
+                    await this.ctx.reply(i18n("Incorrect phone number"))
                     this.displayLoginMenu()
                     return
                 }
@@ -74,7 +75,7 @@ class Bot {
                     this.user.phone_number = text
                     this.displayConfirmLoginMenu()
                 } else {
-                    await this.ctx.reply(i18n("Incorrect phone number"))
+                    await this.ctx.reply(i18n("Incorrect phone format"))
                     this.displayLoginMenu()
                 }     
         }
