@@ -100,7 +100,8 @@ class Bot {
                     await userStorage.update(this.tg_user_id, {is_active: true,
                                                                      access_token: res.response.data.access_token,
                                                                      refresh_token: res.response.data.refresh_token})
-                    this.displayMainMenu()
+                                                                     await keyboards.removeKeyboard
+                                                                     this.displayMainMenu()
                 } else {
                     await this.ctx.reply(i18n("Incorrect code"))
                     this.displayConfirmLoginMenu()
@@ -112,8 +113,9 @@ class Bot {
         await userStorage.changeStep(this.tg_user_id, steps.MAIN)
 
         this.ctx.reply(i18n("Main menu"),
+        await keyboards.removeKeyboard,
             await keyboards.mainMenuKeyboard(i18n),
-            await keyboards.removeKeyboard)
+            )
     }
     async handleMainMenu(text) {
         switch (text) {
