@@ -497,10 +497,10 @@ class Bot {
                 await this.ctx.deleteMessage()
                 this.displayMusavamaMenu()
                 break
-            case 'mudaraba':
-                await this.ctx.deleteMessage()
-                this.displayMudarabaMenu()
-                break
+            // case 'mudaraba':
+            //     await this.ctx.deleteMessage()
+            //     this.displayMudarabaMenu()
+            //     break
             case 'back':
                 await this.ctx.deleteMessage()
                 this.displayMainMenu()
@@ -513,7 +513,7 @@ class Bot {
     }
     async displayMissionMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.ABOUT_MISSION)
-        this.ctx.reply(i18n('Mission content'),
+        this.ctx.replyWithHTML(i18n('Mission content'),
             await keyboards.backKeyboard(i18n),
             await keyboards.backtoMenu(i18n))
     }

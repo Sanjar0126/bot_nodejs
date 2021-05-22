@@ -16686,3 +16686,122 @@
   label: 'iman-client-bot',
   metadata: {}
 }
+{
+  message: 'Connected to the database',
+  level: 'info',
+  timestamp: '2021-05-21T13:09:02.889Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'testing1',
+  level: 'info',
+  timestamp: '2021-05-22T04:20:36.129Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'MongoDb url: mongodb+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority',
+  level: 'info',
+  timestamp: '2021-05-22T04:20:36.137Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Bot started ...',
+  level: 'info',
+  timestamp: '2021-05-22T04:20:36.144Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Connected to the database',
+  level: 'info',
+  timestamp: '2021-05-22T04:20:38.145Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'testing1',
+  level: 'info',
+  timestamp: '2021-05-22T04:22:23.174Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'MongoDb url: mongodb+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority',
+  level: 'info',
+  timestamp: '2021-05-22T04:22:23.178Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Bot started ...',
+  level: 'info',
+  timestamp: '2021-05-22T04:22:23.183Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Connected to the database',
+  level: 'info',
+  timestamp: '2021-05-22T04:22:25.252Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'testing1',
+  level: 'info',
+  timestamp: '2021-05-22T04:24:55.444Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'MongoDb url: mongodb+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority',
+  level: 'info',
+  timestamp: '2021-05-22T04:24:55.448Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Bot started ...',
+  level: 'info',
+  timestamp: '2021-05-22T04:24:55.453Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Connected to the database',
+  level: 'info',
+  timestamp: '2021-05-22T04:24:58.167Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'testing1',
+  level: 'info',
+  timestamp: '2021-05-22T04:27:51.195Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'MongoDb url: mongodb+srv://iman:iman@cluster0.3yg4b.mongodb.net/iman_client_bot_db?retryWrites=true&w=majority',
+  level: 'info',
+  timestamp: '2021-05-22T04:27:51.199Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Bot started ...',
+  level: 'info',
+  timestamp: '2021-05-22T04:27:51.204Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}
+{
+  message: 'Connected to the database',
+  level: 'info',
+  timestamp: '2021-05-22T04:27:53.344Z',
+  label: 'iman-client-bot',
+  metadata: {}
+}

@@ -209,7 +209,7 @@ const keyboards = {
                 ],
                 [
                     Markup.button.callback(i18n('Musavama'), 'musavama'),
-                    Markup.button.callback(i18n('Mudaraba'), 'mudaraba'),
+                    // Markup.button.callback(i18n('Mudaraba'), 'mudaraba'),
                 ],
                 [
                     Markup.button.callback(i18n('btn_back'), 'back')
