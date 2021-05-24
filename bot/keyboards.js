@@ -5,9 +5,16 @@ const keyboards = {
     removeKeyboard: Markup.removeKeyboard(),
     chooseIfMainCard: (i18n) =>{
         return new Promise((resolve, reject) => {
-            let keyboard = Markup.inlineKeyboard([
-                Markup.button.callback(i18n('yes'))
+            let keyboard = Markup.keyboard([
+                [
+                    Markup.button.callback(i18n('Yes!'), 'yes'),
+                    Markup.button.callback(i18n('No!'), 'no'),
+                ],
+                [
+                    Markup.button.callback(i18n('btn_back'), 'back'),
+                ]
             ])
+            resolve(keyboard)
         })
     },
     cancelKeyboard: (i18n) => {
@@ -31,11 +38,7 @@ const keyboards = {
         return new Promise((resolve, reject) => {
             let keyboard = Markup.keyboard([
                 [
-                    Markup.button.callback(i18n('Yes!'), 'yes'),
-                    Markup.button.callback(i18n('No!'), 'no'),
-                ],
-                [
-                    Markup.button.callback(i18n('btn_back'), 'back'),
+                    Markup.button.callback(i18n('menu_back'), 'menu_back'),
                 ]
             ])
             resolve(keyboard)

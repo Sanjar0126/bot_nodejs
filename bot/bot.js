@@ -504,7 +504,7 @@ class Bot {
     async display_main_card_choice(){
         await userStorage.changeStep(this.tg_user_id, steps.MAIN_CARD_CHOICE)
         this.ctx.reply(i18n('IF MAIN CARD'),
-            await keyboards.cancelKeyboard(i18n),
+            await keyboards.chooseIfMainCard(i18n),
             await keyboards.backtoMenu(i18n))
     }
     async handle_choice_main_card(text){
