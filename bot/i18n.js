@@ -51,10 +51,6 @@ let languages = {
         'uz': 'Transaksiya statusi',
         'ru': 'Статус транзакции'
     },
-    'repayment_schedule_date': {
-        'uz': 'repayment_schedule_date',
-        'ru': 'repayment_schedule_date'
-    },
     'update_at': {
         'uz': "Yangilangan sanasi",
         'ru': 'Дата обновление'
@@ -405,11 +401,11 @@ let languages = {
         'uz': 'Karta raqamini kiriting:',
         'ru': 'Введите номер карты:'
     },
-<<<<<<< HEAD
     'IF MAIN CARD': {
         'uz': 'Bu karta asosiy karta bo\'lishini xohlaysizmi?',
         'ru': 'Вы хотите чтобы этот карта была основной?'
-=======
+    },
+
     'repayment_schedule_date': {
         'uz': "To'lov sa'nasi",
         'ru': 'Дата оплаты'
@@ -417,7 +413,6 @@ let languages = {
     'logout': {
         'uz': 'Accountdan chiqish',
         'ru': 'Выйти из аккаунта'
->>>>>>> 07868c13b8b49de2f075aefa8a6759231b83b747
     }
 }
 
