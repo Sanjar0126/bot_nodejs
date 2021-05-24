@@ -277,10 +277,10 @@ class Bot {
                 let cancel_request = await httpClient.CancelPayment(guid, this.user.access_token)
                 if(cancel_request.status==200){
                     console.log("success")
-                    await this.ctx.reply("Success")
+                    await this.ctx.reply(i18n("success"))
                 }else{
                     console.log("bad")
-                    await this.ctx.reply("bad request")
+                    await this.ctx.reply(i18n("error send request"))
                 }
                 this.displayCreditPaymentMenu(guid)
                 break
@@ -293,7 +293,7 @@ class Bot {
         if(card_list.status!=200){
             console.log("ERROR SENDING CARD LIST REQUEST")
             await this.ctx.deleteMessage()
-            await this.ctx.reply('error occured')
+            await this.ctx.reply('error send request')
             await this.displayCreditPaymentMenu(guid)
         }
         else {
@@ -516,7 +516,7 @@ class Bot {
             case 'yes':
                 add_card_req = await httpClient.add_card_request(customer_id, guid, num, month, year, this.user.access_token, true)
                 if (add_card_req.status == 200) {
-                    this.ctx.reply("SUCCESS")
+                    this.ctx.reply(i18n("success"))
                 } else {
                     this.ctx.reply("FAIL")
                 }
@@ -526,7 +526,7 @@ class Bot {
             case 'no':
                 add_card_req = await httpClient.add_card_request(customer_id, guid, num, month, year, this.user.access_token, false)
                 if (add_card_req.status == 200) {
-                    this.ctx.reply("SUCCESS")
+                    this.ctx.reply(i18n("success"))
                 } else {
                     this.ctx.reply("FAIL")
                 }

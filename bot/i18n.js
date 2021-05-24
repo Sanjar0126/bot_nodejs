@@ -421,6 +421,30 @@ let languages = {
     'error send request': {
         'uz': 'xatolik yuz berdi',
         'ru': 'Произошло ошибка'
+    },
+    'Error month!': {
+        'uz': "Oy xato kiritildi",
+        'ru': 'Месяц введен неправильно'
+    },
+    'Enter card expire month': {
+        'uz': 'Karta tugash oyini kiriting',
+        'ru': 'Введите месяц (?)'
+    },
+    'Enter card expire year': {
+        'uz': 'Karta tugash yilini kiriting',
+        'ri': 'Введите год (?)'
+    },
+    'Error card number!' : {
+        'uz ': 'Karta nomeri xato kiritildi',
+        'ru': 'Номер карты введен неправильно'
+    },
+    'Enter sms code': {
+        'uz': 'Telefongizga kelgan SMS kodni kiriting',
+        'ru': 'Введите смс код'
+    },
+    'WANNA AUTO PAY': {
+        'uz': 'Avto to\'lov bo\'lishini xohlaysizmi?',
+        'ru': 'Хотите автопогашение?'
     }
 }
 
