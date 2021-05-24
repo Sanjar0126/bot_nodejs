@@ -368,25 +368,38 @@ class Bot {
                     break
                 }
             case 'manual':
-                let card=text[1]
-                let e_year=text[2].substr(0, 2)
-                let e_mon=text[2].substr(2, 2)
-                let req = await httpClient.add_card_request(customer_id, guid, card, e_mon, e_year, this.user.access_token, true)
-                if (req.status == 200) {
-                    this.ctx.reply(i18n('success'))
-                } else {
-                    this.ctx.reply(i18n('error send request'))
-                    this.displayBankCardMenu(guid, customer_id)
+                await this.ctx.deleteMessage()
+                if(text[3]=='T') {
+                    let sub_req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, false)
+                    if (sub_req.status == 200) {
+                        this.ctx.reply(i18n('success'))
+                        this.display_confirm_subs(guid, customer_id)
+                    } else {
+                        this.ctx.reply(i18n('error send request'))
+                        this.displayBankCardMenu(guid, customer_id)
+                    }
+                    break
+                }else{
+                    let card=text[1]
+                    let e_year=text[2].substr(0, 2)
+                    let e_mon=text[2].substr(2, 2)
+                    let req = await httpClient.add_card_request(customer_id, guid, card, e_mon, e_year, this.user.access_token, true)
+                    if (req.status == 200) {
+                        this.ctx.reply(i18n('success'))
+                    } else {
+                        this.ctx.reply(i18n('error send request'))
+                        this.displayBankCardMenu(guid, customer_id)
+                    }
+                    let sub_req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, false)
+                    if (sub_req.status == 200) {
+                        this.ctx.reply(i18n('success'))
+                        this.display_confirm_subs(guid, customer_id)
+                    } else {
+                        this.ctx.reply(i18n('error send request'))
+                        this.displayBankCardMenu(guid, customer_id)
+                    }
+                    break
                 }
-                let sub_req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, false)
-                if (sub_req.status == 200) {
-                    this.ctx.reply(i18n('success'))
-                    this.display_confirm_subs(guid, customer_id)
-                } else {
-                    this.ctx.reply(i18n('error send request'))
-                    this.displayBankCardMenu(guid, customer_id)
-                }
-                break
         }
     }
 
