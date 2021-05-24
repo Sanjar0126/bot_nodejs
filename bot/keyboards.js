@@ -5,7 +5,7 @@ const keyboards = {
     removeKeyboard: Markup.removeKeyboard(),
     chooseIfMainCard: (i18n) =>{
         return new Promise((resolve, reject) => {
-            let keyboard = Markup.keyboard([
+            let keyboard = Markup.inlineKeyboard([
                 [
                     Markup.button.callback(i18n('Yes!'), 'yes'),
                     Markup.button.callback(i18n('No!'), 'no'),
