@@ -124,8 +124,8 @@ let languages = {
         'ru': 'Долг текущего месяца'
     },
     'Month debt': {
-        'uz': 'Qarz yoq',
-        'ru': 'Долгa нету '
+        'uz': 'Qarz yo\'q',
+        'ru': 'Долгa нет '
     },
     "amount": {
         'uz': "summa",
@@ -413,6 +413,14 @@ let languages = {
     'logout': {
         'uz': 'Accountdan chiqish',
         'ru': 'Выйти из аккаунта'
+    },
+    'success':{
+        'uz': "So'rov yuborildi",
+        'ru': "Запрос отправлен"
+    },
+    'error send request': {
+        'uz': 'xatolik yuz berdi',
+        'ru': 'Произошло ошибка'
     }
 }
 
