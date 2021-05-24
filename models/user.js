@@ -53,6 +53,7 @@ const UserSchema = new mongoose.Schema({
 
             steps.TRANSACTIONS,
             steps.TRANSACTION_DETAIL,
+            steps.MAIN_CARD_CHOICE,
         ],
     },
     language: {

@@ -306,45 +306,75 @@ class Bot {
                 break;
             default:
                 await this.ctx.deleteMessage()
-                this.displayRegisterSubscription(guid, customer_id)
+                this.displayRegisterSubscription(guid, customer_id, res)
                 break;
         }
     }
 
-    async displayRegisterSubscription(guid, customer_id){
+    async displayRegisterSubscription(guid, customer_id, res){
         await userStorage.changeStep(this.tg_user_id, steps.SUBSCRIBE_PAY)
         this.ctx.reply(i18n('WANNA AUTO PAY'),
-            await keyboards.is_subscribed_choose(i18n),
+            await keyboards.is_subscribed_choose(i18n, res),
             await keyboards.backtoMenu(i18n))
     }
 
-    async handle_subscribe_choice(text){
-        switch (text) {
+    async handle_subscribe_choice(res){
+        let text = res.split('/', 4)
+        switch (text[0]) {
             case 'back':
                 await this.ctx.deleteMessage()
                 this.displayBankCardMenu(guid, customer_id)
                 break
             case 'auto':
                 await this.ctx.deleteMessage()
-                let sub_req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, true)
-                if(sub_req.status==200){
-                    this.ctx.reply('success')
-                    this.display_confirm_subs(guid, customer_id)
+                if(text[3]=='T') {
+                    let sub_req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, true)
+                    if (sub_req.status == 200) {
+                        this.ctx.reply(i18n('success'))
+                        this.display_confirm_subs(guid, customer_id)
+                    } else {
+                        this.ctx.reply(i18n('error send request'))
+                        this.displayBankCardMenu(guid, customer_id)
+                    }
+                    break
+                }else{
+                    let card=text[1]
+                    let e_year=text[2].substr(0, 2)
+                    let e_mon=text[2].substr(2, 2)
+                    let req = await httpClient.add_card_request(customer_id, guid, card, e_mon, e_year, this.user.access_token, true)
+                    if (req.status == 200) {
+                        this.ctx.reply(i18n('success'))
+                    } else {
+                        this.ctx.reply(i18n('error send request'))
+                        this.displayBankCardMenu(guid, customer_id)
+                    }
+                    let sub_req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, true)
+                    if (sub_req.status == 200) {
+                        this.ctx.reply(i18n('success'))
+                        this.display_confirm_subs(guid, customer_id)
+                    } else {
+                        this.ctx.reply(i18n('error send request'))
+                        this.displayBankCardMenu(guid, customer_id)
+                    }
+                    break
                 }
-                else{
-                    this.ctx.reply('error send request')
+            case 'manual':
+                let card=text[1]
+                let e_year=text[2].substr(0, 2)
+                let e_mon=text[2].substr(2, 2)
+                let req = await httpClient.add_card_request(customer_id, guid, card, e_mon, e_year, this.user.access_token, true)
+                if (req.status == 200) {
+                    this.ctx.reply(i18n('success'))
+                } else {
+                    this.ctx.reply(i18n('error send request'))
                     this.displayBankCardMenu(guid, customer_id)
                 }
-                break
-            case 'manual':
-                await this.ctx.deleteMessage()
-                let req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, false)
-                if(req.status==200){
-                    this.ctx.reply('success')
+                let sub_req = await httpClient.register_subscribe(customer_id, guid, this.user.access_token, false)
+                if (sub_req.status == 200) {
+                    this.ctx.reply(i18n('success'))
                     this.display_confirm_subs(guid, customer_id)
-                }
-                else{
-                    this.ctx.reply('error send request')
+                } else {
+                    this.ctx.reply(i18n('error send request'))
                     this.displayBankCardMenu(guid, customer_id)
                 }
                 break
@@ -434,23 +464,58 @@ class Bot {
             await keyboards.backtoMenu(i18n))
     }
     async add_card_month(txt){
+        if(txt=='cancel') {
+            card_num = exp_month = exp_year = "";
+            await this.ctx.deleteMessage()
+            this.displayBankCardMenu(guid, customer_id)
+            return
+        }
         if(parseInt(txt)>0 && parseInt(txt)<=12) {
             exp_month = txt
-            let num = card_num
-            let month = parseInt(exp_month)
-            let year = parseInt(exp_year)
-            let add_card_req = await httpClient.add_card_request(customer_id, guid, num, month, year, this.user.access_token)
-            if (add_card_req.status == 200) {
-                this.ctx.reply("SUCCESS")
-            } else {
-                this.ctx.reply("FAIL")
-            }
-            card_num = exp_month = exp_year = "";
-            this.displayBankCardMenu(guid, customer_id)
+            this.display_main_card_choice()
         }
         else{
             this.ctx.reply(i18n("Error month!"))
             this.display_add_card_month()
+        }
+    }
+    async display_main_card_choice(){
+        await userStorage.changeStep(this.tg_user_id, steps.MAIN_CARD_CHOICE)
+        this.ctx.reply(i18n('IF MAIN CARD'),
+            await keyboards.cancelKeyboard(i18n),
+            await keyboards.backtoMenu(i18n))
+    }
+    async handle_choice_main_card(text){
+        let num = card_num
+        let month = parseInt(exp_month)
+        let year = parseInt(exp_year)
+        let add_card_req
+        switch (text) {
+            case 'yes':
+                add_card_req = await httpClient.add_card_request(customer_id, guid, num, month, year, this.user.access_token, true)
+                if (add_card_req.status == 200) {
+                    this.ctx.reply("SUCCESS")
+                } else {
+                    this.ctx.reply("FAIL")
+                }
+                card_num = exp_month = exp_year = "";
+                this.displayBankCardMenu(guid, customer_id)
+                break
+            case 'no':
+                add_card_req = await httpClient.add_card_request(customer_id, guid, num, month, year, this.user.access_token, false)
+                if (add_card_req.status == 200) {
+                    this.ctx.reply("SUCCESS")
+                } else {
+                    this.ctx.reply("FAIL")
+                }
+                card_num = exp_month = exp_year = "";
+                this.displayBankCardMenu(guid, customer_id)
+                break
+            case 'cancel':
+                card_num = exp_month = exp_year = "";
+                await this.ctx.deleteMessage()
+                this.displayBankCardMenu(guid, customer_id)
+                break
         }
     }
 

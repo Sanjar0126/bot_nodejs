@@ -1,4 +1,12 @@
 let languages = {
+    'Yes!': {
+        'uz': 'Ha',
+        'ru': "Да"
+    },
+    'No!': {
+        'ru': 'Нет',
+        'uz': "Yo'q"
+    },
     'Enter phone number': {
         'uz': "Iltimos, telefon raqamingizni quyidagi formatda kiriting +998ХХХХХХХХХ",
         'ru': "Пожалуйста, введите свой номер телефона в формате +998ХХХХХХХХХ",
@@ -392,6 +400,10 @@ let languages = {
         'uz': 'Karta raqamini kiriting:',
         'ru': 'Введите номер карты:'
     },
+    'IF MAIN CARD': {
+        'uz': 'Bu karta asosiy karta bo\'lishini xohlaysizmi?',
+        'ru': 'Вы хотите чтобы этот карта была основной?'
+    }
 }
 
 let language = 'ru'

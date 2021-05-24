@@ -139,6 +139,9 @@ const handlers = {
                 case steps.SUBSCRIBE_CONFIRM:
                     bot.handle_confirm_subs(text)
                     break
+                case steps.MAIN_CARD_CHOICE:
+                    bot.handle_choice_main_card(text)
+                    break
             }
         } catch(e) {
             logger.error("Error while handling inline message: " + e)

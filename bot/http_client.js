@@ -72,11 +72,12 @@ const httpClient = {
                 }
             })
     },
-    async add_card_request(customer_id, guid, card_num, exp_mon, exp_year, token){
+    async add_card_request(customer_id, guid, card_num, exp_mon, exp_year, token, status){
         return await axios.post(config.SERVER_URL+'/v1/customers/'+customer_id+'/installments/'+guid+'/card',{
             card_expiry_month: exp_mon,
             card_expiry_year: exp_year,
-            card_number: card_num
+            card_number: card_num,
+            is_active: status
         }, {
             headers:{
                 Authorization: token

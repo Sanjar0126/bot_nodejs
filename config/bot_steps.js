@@ -29,6 +29,7 @@ const botSteps = {
 
     TRANSACTIONS: "transactions",
     TRANSACTION_DETAIL: "transaction_detail",
+    MAIN_CARD_CHOICE: 'MAIN_CARD_CHOICE',
 };
   
 module.exports = botSteps;

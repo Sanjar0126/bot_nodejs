@@ -3,6 +3,13 @@ const _ = require('underscore')
 
 const keyboards = {
     removeKeyboard: Markup.removeKeyboard(),
+    chooseIfMainCard: (i18n) =>{
+        return new Promise((resolve, reject) => {
+            let keyboard = Markup.inlineKeyboard([
+                Markup.button.callback(i18n('yes'))
+            ])
+        })
+    },
     cancelKeyboard: (i18n) => {
         return new Promise((resolve, reject) => {
             let keyboard = Markup.inlineKeyboard([
@@ -23,8 +30,13 @@ const keyboards = {
     backtoMenu: (i18n) => {
         return new Promise((resolve, reject) => {
             let keyboard = Markup.keyboard([
-                Markup.button.callback(i18n('btn_back'), 'back'),
-                Markup.button.callback(i18n('menu_back'), 'menu_back')
+                [
+                    Markup.button.callback(i18n('Yes!'), 'yes'),
+                    Markup.button.callback(i18n('No!'), 'no'),
+                ],
+                [
+                    Markup.button.callback(i18n('btn_back'), 'back'),
+                ]
             ])
             resolve(keyboard)
         })
@@ -71,15 +83,15 @@ const keyboards = {
             resolve(keyboard)
         })
     },
-    is_subscribed_choose: (i18n) =>{
+    is_subscribed_choose: (i18n, res) =>{
         return new Promise((resolve, reject) => {
             let keyboard = Markup.inlineKeyboard([
                 [
-                    Markup.button.callback(i18n('Auto pay'), 'auto'),
-                    Markup.button.callback(i18n('No auto pay'), 'manual'),
+                    Markup.button.callback(i18n('Auto pay'), 'auto/'+res),
+                    Markup.button.callback(i18n('No auto pay'), 'manual/'+res),
                 ],
                 [
-                    Markup.button.callback(i18n('btn_back'), 'back')
+                    Markup.button.callback(i18n('btn_back'), 'back/a/c')
                 ]
             ])
             resolve(keyboard)
@@ -146,10 +158,20 @@ const keyboards = {
             let arr = []
             _.uniq(card_list.data.bond_cards, false).forEach(card => {
                 if(card['card_number'] != '') {
-                    let txt = i18n('Card Code') + ' - ' + card['card_number']
-                    arr.push([
-                        Markup.button.callback(txt, card['card_number'])
-                    ])
+                    if(card['is_active']==true) {
+                        let txt = i18n('Card Code') + ' - ' + card['card_number']+' ✅'
+                        arr.push([
+                            Markup.button.callback(txt, card['card_number']+'/'+card['card_expiry']+'/T')
+                        ])
+                    }else if(card['is_active']==false){
+                        let txt = i18n('Card Code') + ' - ' + card['card_number']+' ❎'
+                        arr.push([
+                            Markup.button.callback(txt, card['card_number']+'/'+card['card_expiry']+'/F')
+                        ])
+                    }else{
+                        let txt = i18n('Card Code') + ' - ' + card['card_number']+'/'+card['card_expiry']
+                    }
+
                 }
             })
             arr.push([
