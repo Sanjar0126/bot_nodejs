@@ -13,20 +13,20 @@ const httpClient = {
     async check_phone(text){
         let phone = text.replace('+', '')
         let status
-        try {
-            let res = await axios.post(SMS_CODE, {
+        
+            try{let res = await axios.post(SMS_CODE, {
                 phone_number: phone
             })
             console.log(res.status);
             status = res.status
-            return {
-                status_code: status,
+            return res}catch(e){
+                status =500
+                return {
+                    res: status
+                }
             }
-        }catch (e) {
-            return{
-                status: 404
-            }
-        }
+            
+        
     },
 
     async confirmLogin(text, code){

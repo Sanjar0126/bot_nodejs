@@ -62,14 +62,21 @@ class Bot {
                 if (!text.startsWith("+", 0)) {
                     text = '+' + text
                 }
+                if(!utils.validatePhoneNumber(text)){
+                    console.log('phone error')
+                    await this.ctx.reply(i18n("Incorrect phone number"))
+                    this.displayLoginMenu()
+                    return
+                }
                 let res
                 res = await httpClient.check_phone(text)
-                if (res.status_code==200 && utils.validatePhoneNumber(text)) {
+                console.log('response'+res.status)
+                if (res.status==200 ) {
                     await userStorage.update(this.tg_user_id, {'phone_number': text})
                     this.user.phone_number = text
                     this.displayConfirmLoginMenu()
                 } else {
-                    await this.ctx.reply(i18n("Incorrect phone number"))
+                    await this.ctx.reply(i18n("Incorrect phone format"))
                     this.displayLoginMenu()
                 }     
         }
@@ -94,7 +101,8 @@ class Bot {
                     await userStorage.update(this.tg_user_id, {is_active: true,
                                                                      access_token: res.response.data.access_token,
                                                                      refresh_token: res.response.data.refresh_token})
-                    this.displayMainMenu()
+                                                                     await keyboards.removeKeyboard
+                                                                     this.displayMainMenu()
                 } else {
                     await this.ctx.reply(i18n("Incorrect code"))
                     this.displayConfirmLoginMenu()
@@ -107,7 +115,8 @@ class Bot {
 
         this.ctx.reply(i18n("Main menu"),
             await keyboards.mainMenuKeyboard(i18n),
-            await keyboards.removeKeyboard)
+            await keyboards.removeKeyboard,
+            )
     }
     async handleMainMenu(text) {
         switch (text) {
@@ -683,7 +692,7 @@ class Bot {
 
     async displayTransactionDetailMenu(guid) {
         await userStorage.changeStep(this.tg_user_id, steps.TRANSACTION_DETAIL)
-        let transactions = await httpClient.getTransactions(this.user.phone_number, this.user.access_token)
+        let transactions = await httpClient.getTransactions(this.user.phone_number, this.user.access_token, trans_page_num)
         let transaction
         try {
             transactions.result.data.bond_payments.forEach(res => {
@@ -696,6 +705,7 @@ class Bot {
             this.displayTransactionsMenu()
             return
         }
+        console.log(transaction['bond_id'])
         let text = utils.getTransactionDetail(i18n, transaction)
         await this.ctx.replyWithHTML(text,
             await keyboards.backKeyboard(i18n),
@@ -705,7 +715,7 @@ class Bot {
         switch (text) {
             case 'back':
                 await this.ctx.deleteMessage()
-                this.displayTransactionsMenu()
+                this.displayTransactionsMenu(trans_page_num)
                 break
             case 'menu_back':
                 await this.ctx.deleteMessage()
