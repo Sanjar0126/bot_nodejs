@@ -58,35 +58,49 @@ const httpClient = {
             })
     },
     async register_subscribe(customer_id, guid, token, status){
-        return await axios.post(config.SERVER_URL+'/v1/customers/'+customer_id+'/installments/'+guid+'/registry-subscription',
-            {
-                is_subscribed: status
-            },
-            {
-                headers:{
+        try{
+            return await axios.post(config.SERVER_URL + '/v1/customers/' + customer_id + '/installments/' + guid + '/registry-subscription',
+                {
+                    is_subscribed: status
+                },
+                {
+                    headers: {
+                        Authorization: token
+                    },
+                    params: {
+                        id: customer_id,
+                        guid: guid
+                    }
+                })
+        }catch (e) {
+            console.log(e)
+            return {
+                status: 501
+            }
+        }
+    },
+    async add_card_request(customer_id, guid, card_num, exp_mon, exp_year, token, status){
+        try{
+            return await axios.post(config.SERVER_URL + '/v1/customers/' + customer_id + '/installments/' + guid + '/card', {
+                card_expiry_month: exp_mon,
+                card_expiry_year: exp_year,
+                card_number: card_num,
+                is_active: status
+            }, {
+                headers: {
                     Authorization: token
                 },
-                params:{
+                params: {
                     id: customer_id,
                     guid: guid
                 }
             })
-    },
-    async add_card_request(customer_id, guid, card_num, exp_mon, exp_year, token, status){
-        return await axios.post(config.SERVER_URL+'/v1/customers/'+customer_id+'/installments/'+guid+'/card',{
-            card_expiry_month: exp_mon,
-            card_expiry_year: exp_year,
-            card_number: card_num,
-            is_active: status
-        }, {
-            headers:{
-                Authorization: token
-            },
-            params:{
-                id: customer_id,
-                guid: guid
+        }catch (e) {
+            console.log(e)
+            return {
+                status: 500
             }
-        })
+        }
     },
     async get_card_list(guid, access_token){
         try

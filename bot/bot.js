@@ -350,9 +350,10 @@ class Bot {
                     let card=text[1]
                     let e_year=text[2].substr(0, 2)
                     let e_mon=text[2].substr(2, 2)
-                    let req = await httpClient.add_card_request(customer_id, guid, card, e_mon, e_year, this.user.access_token, true)
+                    let req = await httpClient.add_card_request(customer_id, guid, card, parseInt(e_mon), parseInt(e_year), this.user.access_token, true)
                     if (req.status == 200) {
                         this.ctx.reply(i18n('success'))
+                        this.display_confirm_subs(guid, customer_id)
                     } else {
                         this.ctx.reply(i18n('error send request'))
                         this.displayBankCardMenu(guid, customer_id)
@@ -383,9 +384,10 @@ class Bot {
                     let card=text[1]
                     let e_year=text[2].substr(0, 2)
                     let e_mon=text[2].substr(2, 2)
-                    let req = await httpClient.add_card_request(customer_id, guid, card, e_mon, e_year, this.user.access_token, true)
+                    let req = await httpClient.add_card_request(customer_id, guid, card, parseInt(e_mon), parseInt(e_year), this.user.access_token, true)
                     if (req.status == 200) {
                         this.ctx.reply(i18n('success'))
+                        this.display_confirm_subs(guid, customer_id)
                     } else {
                         this.ctx.reply(i18n('error send request'))
                         this.displayBankCardMenu(guid, customer_id)
