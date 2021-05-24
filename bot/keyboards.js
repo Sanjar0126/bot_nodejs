@@ -11,7 +11,7 @@ const keyboards = {
                     Markup.button.callback(i18n('No!'), 'no'),
                 ],
                 [
-                    Markup.button.callback(i18n('btn_back'), 'back'),
+                    Markup.button.callback(i18n('btn_back'), 'cancel'),
                 ]
             ])
             resolve(keyboard)
