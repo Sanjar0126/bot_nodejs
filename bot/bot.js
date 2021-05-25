@@ -88,8 +88,8 @@ class Bot {
         this.ctx.replyWithHTML(i18n('Confirm with sms code'), 
             await keyboards.backKeyboard(i18n))
     }
-    async handleConfirmLoginMenu(text) {
 
+    async handleConfirmLoginMenu(text) {
         switch (text) {
             case 'back':
                 await this.ctx.deleteMessage()
@@ -102,17 +102,22 @@ class Bot {
                                                                      access_token: res.response.data.access_token,
                                                                      refresh_token: res.response.data.refresh_token})
                                                                      await keyboards.removeKeyboard
-                                                                     this.displayMainMenu()
+                                                                     this.removeKeyboard()
                 } else {
                     await this.ctx.reply(i18n("Incorrect code"))
                     this.displayConfirmLoginMenu()
                 }     
         }
     }
+
+    async removeKeyboard(){
+        await userStorage.changeStep(this.tg_user_id, steps.REMOVE_KEYBOARD)
+        await keyboards.removeKeyboard
+        this.displayMainMenu()
+    }
     
     async displayMainMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.MAIN)
-
         this.ctx.reply(i18n("Main menu"),
             await keyboards.mainMenuKeyboard(i18n),
             await keyboards.removeKeyboard,

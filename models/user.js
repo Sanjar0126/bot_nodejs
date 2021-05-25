@@ -54,6 +54,7 @@ const UserSchema = new mongoose.Schema({
             steps.TRANSACTIONS,
             steps.TRANSACTION_DETAIL,
             steps.MAIN_CARD_CHOICE,
+            steps.REMOVE_KEYBOARD
         ],
     },
     language: {

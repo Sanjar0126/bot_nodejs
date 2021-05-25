@@ -30,6 +30,7 @@ const botSteps = {
     TRANSACTIONS: "transactions",
     TRANSACTION_DETAIL: "transaction_detail",
     MAIN_CARD_CHOICE: 'MAIN_CARD_CHOICE',
+    REMOVE_KEYBOARD: 'remove keyboard'
 };
   
 module.exports = botSteps;
