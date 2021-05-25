@@ -14,13 +14,15 @@ const httpClient = {
         let phone = text.replace('+', '')
         let status
         
-            try{let res = await axios.post(SMS_CODE, {
-                phone_number: phone
-            })
-            console.log(res.status);
-            status = res.status
-            return res}catch(e){
-                status =500
+            try{
+                let res = await axios.post(SMS_CODE, {
+                    phone_number: phone
+                })
+                console.log(res.status);
+                status = res.status
+                return res
+            }catch(e){
+                status = 500
                 return {
                     res: status
                 }
