@@ -84,7 +84,7 @@ class Bot {
 
     async removeKeyboard(){
         await userStorage.changeStep(this.tg_user_id, steps.REMOVE_KEYBOARD)
-        this.ctx.reply(await keyboards.removeKeyboard)
+        await keyboards.removeKeyboard
         this.displayConfirmLoginMenu()
     }
     
