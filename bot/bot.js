@@ -3,6 +3,7 @@ const keyboards = require('./keyboards')
 const steps = require('../config/bot_steps')
 const utils = require('./utils')
 const httpClient = require('./http_client')
+const { Markup } = require('telegraf')
 const {i18n, activateLanguage} = require('./i18n')
 var credits
 var transactions;
@@ -102,7 +103,7 @@ class Bot {
                                                                      access_token: res.response.data.access_token,
                                                                      refresh_token: res.response.data.refresh_token})
                                                                      await keyboards.removeKeyboard
-                                                                     this.removeKeyboard()
+                                                                     this.displayMainMenu()
                 } else {
                     await this.ctx.reply(i18n("Incorrect code"))
                     this.displayConfirmLoginMenu()
@@ -110,19 +111,13 @@ class Bot {
         }
     }
 
-    async removeKeyboard(){
-        await userStorage.changeStep(this.tg_user_id, steps.REMOVE_KEYBOARD)
-        await keyboards.removeKeyboard
-        this.displayMainMenu()
-    }
-    
     async displayMainMenu() {
         await userStorage.changeStep(this.tg_user_id, steps.MAIN)
         this.ctx.reply(i18n("Main menu"),
             await keyboards.mainMenuKeyboard(i18n),
-            await keyboards.removeKeyboard,
             )
     }
+
     async handleMainMenu(text) {
         switch (text) {
             case 'credits':
